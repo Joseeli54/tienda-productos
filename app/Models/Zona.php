@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Product extends Model
+class Zona extends Model
 {
     //definiendo que tabla se refierfe este modelo
     protected $table = 'zona';

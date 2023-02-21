@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Almacen;
+use Illuminate\Support\Facades\DB;
 
 class AlmacenController extends Controller
 {
@@ -24,6 +26,22 @@ class AlmacenController extends Controller
     public function create()
     {
         //
+    }
+
+    public function crearAlmacen(Request $request){
+
+        $almacen = new Almacen();
+
+        $almacen->numero = $request->numero;
+        $almacen->tipo = $request->tipo;
+        $almacen->descripcion = $request->descripcion;
+
+        $almacen->save();                 
+
+        return [
+            "inserted" => 1,
+            "almacen" => $almacen
+        ];
     }
 
     /**
@@ -79,6 +97,9 @@ class AlmacenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Almacen::destroy($id);
+
+        $almacenes = Almacen::all()->sortByDesc("id");
+        return view('home', ["almacenes" => $almacenes]);
     }
 }

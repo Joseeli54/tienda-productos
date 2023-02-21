@@ -2,6 +2,7 @@ body {
 	font-family: 'Tajawal', sans-serif;
 	font-size: 19px;
 	box-sizing: border-box;
+	position: relative;
 }
 
 .logo {
@@ -68,8 +69,16 @@ img.productos-principal  {
 
 
 h1, h2, h3, h4 {
-	font-family: 'Pacifico', cursive;
+	font-family: 'helvetica', cursive;
 	color: #4b4342;
+}
+
+.font-size-title{
+	font-size: 1.2rem;
+}
+
+.font-size-page{
+	font-size: 0.9rem;
 }
 
 .menu-principal a.item-menu {
@@ -81,11 +90,20 @@ h1, h2, h3, h4 {
 	text-align: center;
 }
 
-.menu-principal a.item-menu:hover {
+.div-button:hover{
+	background-color: #8259ff;
+	border: none;
+}
+
+.div-button a:hover{
+	color: white!important;
+}
+
+/*.menu-principal a.item-menu:hover {
 	text-decoration: none;
 	border-bottom: 2px dotted #ff91a4;
 	transition: ease 0.6s;
-}
+}*/
 
 .titulos-principales {
 	font-size: 38px;
@@ -148,6 +166,9 @@ h1, h2, h3, h4 {
 footer {
 	background-color: #808f8e;
 	color: #fff;
+	background: #8259ff; 
+	position: absolute; 
+	bottom: 0!important;
 }
 
 .contenedor-producto {

@@ -10,7 +10,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js') }}"></script>
-   
+    <script src="{{ asset('https://unpkg.com/axios/dist/axios.min.js') }}"></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos-propios.css') }}" rel="stylesheet">
@@ -20,9 +21,7 @@
 </head>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white" style="-webkit-box-shadow: 3px 6px 5px 0px rgba(0,0,0,0.32);
-                                                                  -moz-box-shadow: 3px 6px 5px 0px rgba(0,0,0,0.32);
-                                                                  box-shadow: 3px 6px 5px 0px rgba(0,0,0,0.32);">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
@@ -67,15 +66,14 @@
                 <input type="submit" name="logout" class="btn btn-danger px-md-3 me-md-2" value="Cerrar Sesión">
             </form>
         @else
-
             <a type="button" class="btn btn-secondary px-md-3 me-md-2" href="@php if(Auth::check()){ echo '/logout'; }else{ echo '/login'; } @endphp">
                   Login
             </a>
+            <a type="button" class="btn btn-primary me-3" href="/register">
+              Sign up for free
+            </a>
         @endif
 
-        <a type="button" class="btn btn-primary me-3" href="/register">
-          Sign up for free
-        </a>
         <a class="btn btn-dark px-3" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button"><i class="fa fa-github"></i
         ></a>
       </div>
@@ -92,11 +90,21 @@
                     <nav>
                         <div class="container">
                             <div class="row text-center">
-                                <div class="col"><a class="item-menu" href="/">Inicio</a></div>
-                                <div class="col"><a class="item-menu" href="/">Productos</a></div>
-                                <div class="col"><a class="item-menu" href="/">Almacenes</a></div>
-                                <div class="col"><a class="item-menu" href="">Nosotros</a></div>
-                                <div class="col"><a class="item-menu" href="">Contacto</a></div>
+                                <div class="col card p-2 mx-2 shadow div-button">
+                                    <a class="item-menu" href="/">Inicio</a>
+                                </div>
+                                <div class="col card p-2 mx-2 shadow div-button">
+                                    <a class="item-menu" href="/">Productos</a>
+                                </div>
+                                <div class="col card p-2 mx-2 shadow div-button">
+                                    <a class="item-menu" href="/">Almacenes</a>
+                                </div>
+                                <div class="col card p-2 mx-2 shadow div-button">
+                                    <a class="item-menu" href="">Nosotros</a>
+                                </div>
+                                <div class="col card p-2 mx-2 shadow div-button">
+                                    <a class="item-menu" href="">Contacto</a>
+                                </div>
                             </div>
                         </div>
                     </nav>
@@ -108,16 +116,14 @@
     @section('contenido')
     @show
 
-    <footer style="-webkit-box-shadow: 3px 6px 5px 0px rgba(0,0,0,0.32);
-                  -moz-box-shadow: 3px 6px 5px 0px rgba(0,0,0,0.32);
-                  box-shadow: 3px 6px 5px 0px rgba(0,0,0,0.32);">
+    {{-- <footer class="w-100">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p id="texto-footer" class="mb-0">Tienda - Productos - Almacenes</p>
+                    <p id="texto-footer" class="mb-0" style="font-size: 0.9vw;">Tienda - Productos - Almacenes</p>
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
 
 </html>

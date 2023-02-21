@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Product extends Model
+class Almacen extends Model
 {
     //definiendo que tabla se refierfe este modelo
     protected $table = 'almacen';
@@ -14,4 +14,6 @@ class Product extends Model
     //como la clave primaria es alfanumerica se debe coloar para que llene bien la N a N
     public $incrementing = true;
 
+    //Disable at_update and at_create
+    public $timestamps = false;
 }

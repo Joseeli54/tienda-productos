@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Almacen;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $almacenes = Almacen::all()->sortByDesc("id");
+        return view('home', ["almacenes" => $almacenes]);
     }
 }
