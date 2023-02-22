@@ -68,4 +68,8 @@ class LoginController extends Controller
     public function getUsername(){
         return "username";
     }
+
+    public function getCorreo(){
+        return 'correo';
+    }
 }

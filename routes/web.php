@@ -29,6 +29,7 @@ Auth::routes();
 //Rutas para crear, modificar, eliminar y buscar el almacen
 Route::post('/almacen','AlmacenController@crearAlmacen');
 Route::resource('almacenes', 'AlmacenController');
+Route::resource('productos', 'ProductController');
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Almacen;
+use App\Models\Person;
 
 use Illuminate\Http\Request;
 
@@ -24,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $almacenes = Almacen::all()->sortByDesc("id");
-        return view('home', ["almacenes" => $almacenes]);
+        $almacenes = Almacen::all()->sortByDesc("id")->take(3);
+        $persons = Person::all()->sortByDesc("id")->take(3);
+
+        return view('home', ["almacenes" => $almacenes, 
+                            "persons" => $persons]);
     }
 }
