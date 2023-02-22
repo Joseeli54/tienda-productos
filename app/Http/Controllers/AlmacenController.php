@@ -99,7 +99,10 @@ class AlmacenController extends Controller
     {
         Almacen::destroy($id);
 
-        $almacenes = Almacen::all()->sortByDesc("id");
-        return view('home', ["almacenes" => $almacenes]);
+        $almacenes = Almacen::all()->sortByDesc("id")->take(3);
+        $persons = Person::all()->sortByDesc("id")->take(3);
+
+        return view('home', ["almacenes" => $almacenes, 
+                            "persons" => $persons]);
     }
 }

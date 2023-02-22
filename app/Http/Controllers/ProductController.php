@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -12,8 +14,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
+        $products = Product::all()->sortByDesc("id");
+        return view('products.product-index', ["products" => $products]);
     }
 
     /**
@@ -34,7 +37,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+
+        $product->codigo = $request->codigo;
+        $product->nombre = $request->nombre;
+        $product->tipo = $request->tipo;
+        $product->precio = $request->precio;
+        $product->estado = 'Nuevo';
+        $product->moneda = $request->moneda;
+        $product->tipo = $request->tipo;
+        $product->descripcion = $request->descripcion;
+
+        $product->save();  
+
+        return [
+            "inserted" => 1,
+            "product" => $product
+        ];       
     }
 
     /**

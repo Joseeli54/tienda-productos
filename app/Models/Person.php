@@ -22,7 +22,10 @@ class Person extends Authenticatable
          'apellido',
          'correo',
          'username',
-         'password'
+         'password',
+         'doc_persona',
+         'fec_nac',
+         'telefono'
     ];
 
     protected $hidden = [
@@ -32,5 +35,14 @@ class Person extends Authenticatable
     public function getAuthPassword()
     {
         return $this->password;
+    }
+
+    public function getAllPersons()
+    {
+        return Person::all();
+    }
+
+    public function getPersonByUsername($id){
+        return Alumno::where('username' , '=' , $id)->get();
     }
 }

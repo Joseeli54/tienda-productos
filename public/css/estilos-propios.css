@@ -73,6 +73,10 @@ h1, h2, h3, h4 {
 	color: #4b4342;
 }
 
+button, a {
+	font-size: 19px!important;
+}
+
 .font-size-title{
 	font-size: 1.2rem;
 }

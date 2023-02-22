@@ -23,9 +23,9 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
   <!-- Container wrapper -->
-  <div class="container">
+  <div class="container-fluid mx-md-5">
     <!-- Navbar brand -->
-    <a class="navbar-brand me-2" href="https://mdbgo.com/">
+    <a class="navbar-brand me-2" href="/">
       <img
         src=" {{asset('img/logo.png')}} "
         height="30"
@@ -39,13 +39,13 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarButtonsExample"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarButtonsExample"
       aria-controls="navbarButtonsExample"
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <i class="fas fa-bars"></i>
+      <i class="fa fa-bars"></i>
     </button>
 
     <!-- Collapsible wrapper -->
@@ -53,9 +53,25 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
+          <a class="nav-link" href="/">Dashboard</a>
         </li>
       </ul>
+      @if (Auth::check())
+      <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="productos">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Almacenes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contacto</a>
+        </li>
+      </ul>
+      @endif
       <!-- Left links -->
 
       <div class="d-flex align-items-center">
@@ -74,7 +90,7 @@
             </a>
         @endif
 
-        <a class="btn btn-dark px-3" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button"><i class="fa fa-github"></i
+        <a class="btn btn-dark px-3" href="https://github.com/Joseeli54/tienda-productos" target="_blank" role="button"><i class="fa fa-github"></i
         ></a>
       </div>
     </div>
@@ -83,7 +99,7 @@
   <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
-    @if (Auth::check())
+{{--     @if (Auth::check())
         <div class="container-fluid my-md-4">
             <div class="col-md-12">
                 <header class="menu-principal">
@@ -111,7 +127,7 @@
                 </header>
             </div>
         </div>
-    @endif
+    @endif --}}
 
     @section('contenido')
     @show
