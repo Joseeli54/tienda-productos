@@ -25,7 +25,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid mx-md-5">
     <!-- Navbar brand -->
-    <a class="navbar-brand me-2" href="https://mdbgo.com/">
+    <a class="navbar-brand me-2" href="/">
       <img
         src=" {{asset('img/logo.png')}} "
         height="30"
@@ -53,7 +53,7 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
+          <a class="nav-link" href="/">Dashboard</a>
         </li>
       </ul>
       @if (Auth::check())
