@@ -1,6 +1,6 @@
 body {
 	font-family: 'Tajawal', sans-serif;
-	font-size: 19px;
+	font-size: 16px;
 	box-sizing: border-box;
 	position: relative;
 }
@@ -74,7 +74,7 @@ h1, h2, h3, h4 {
 }
 
 button, a {
-	font-size: 19px!important;
+	font-size: 16px!important;
 }
 
 .font-size-title{

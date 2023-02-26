@@ -37,6 +37,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->hasFile('imagen')){
+          $file = $request->file('imagen');
+          $name = time().$file->getClientOriginalName();
+          $file->move(public_path().'/insertado/producto', $name);
+        }
+        else {
+            $name='producto.png';
+        }
+
         $product = new Product();
 
         $product->codigo = $request->codigo;
@@ -47,6 +56,7 @@ class ProductController extends Controller
         $product->moneda = $request->moneda;
         $product->tipo = $request->tipo;
         $product->descripcion = $request->descripcion;
+        $product->imagen = $name;
 
         $product->save();  
 
@@ -87,7 +97,25 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+        $product->fill($request->except('imagen'));
+
+        if($request->hasFile('imagen')){
+          $file = $request->file('imagen');
+          $name = time().$file->getClientOriginalName();
+          $file->move(public_path().'/insertado/producto', $name);
+        } else {
+          $name= $request->imagen;
+        }
+
+        $product->imagen = $name;
+
+        $product->save();
+
+        return [
+            "updated" => 1,
+            "product" => $product
+        ];       
     }
 
     /**
@@ -98,6 +126,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+
+        $products = Product::all()->sortByDesc("id");
+        return view('products.product-index', ["products" => $products]);
     }
 }
