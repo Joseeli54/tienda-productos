@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Almacen;
+use App\Models\Person;
 use Illuminate\Support\Facades\DB;
 
 class AlmacenController extends Controller

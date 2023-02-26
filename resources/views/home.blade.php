@@ -299,7 +299,7 @@
 
                         $('#contenedorAlmacenes').prepend(
                             '<hr>'+
-                            '<div class="col-md-9 col-12">'+
+                            '<div class="col-md-8 col-12">'+
                                 '<h6>Almacen Numero '+ data['numero'] + '</h6>'+
                                 '<h6><b>Tipo: </b> '+ data['tipo'] + '</h6>'+
                                 '<p>'+ data['descripcion'] +'</p>'+
