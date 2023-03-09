@@ -17,7 +17,7 @@
             </div>
             <div class="mb-3">
               <label for="precio" class="col-form-label">Precio</label>
-              <input type="number" class="form-control" id="precio" name="precio">
+              <input type="number" class="form-control" id="precio" name="precio" step="any">
             </div>
             <div class="mb-3">
               <label for="tipo" class="col-form-label">Tipo</label>
@@ -26,7 +26,18 @@
             <div class="mb-3">
               <label for="moneda" class="col-form-label">Moneda</label>
               <input class="form-control" id="moneda" name="moneda">
-            </div>          
+            </div>
+
+            <div class="mb-3">
+              <label for="id_almacen" class="col-form-label">Asignar un Almacén</label>
+              <select id="id_almacen" name="id_almacen" class="form-select">
+                  <option selected>Seleccione un almacén para el producto</option>
+                @foreach($almacenes as $almacen)
+                  <option value="{{ $almacen->id }}"> Almacén numero {{ $almacen->numero }}</option>
+                @endforeach
+              </select>
+            </div>
+
             <div class="mb-3">
               <label for="descripcion" class="col-form-label">Descripción del Producto</label>
               <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
@@ -71,6 +82,7 @@
       formData.append('tipo', document.getElementById('tipo').value);
       formData.append('moneda', document.getElementById('moneda').value);
       formData.append('descripcion', document.getElementById('descripcion').value);
+      formData.append('id_almacen', document.getElementById('id_almacen').value);
 
       axios.post("/productos", formData)
           .then(function(res) {
@@ -90,12 +102,12 @@
                                 '<div class="text-center my-3">'+
                                   '<img src="'+ urlImagen + '" height="100" width="100">'+
                                 '</div>'+
-                                '<h6>'+ data['tipo'] +'</h6>'+
+                                '<h6><b>'+ data['tipo'] +'</b></h6>'+
                                 '<h6> Codigo #'+ data['codigo'] +'</h6>'+
-                                '<h6>'+ data['precio'] +' '+ data['moneda'] +'</h6>'+
+                                '<h6><b>'+ data['precio'] +' '+ data['moneda'] +'</b></h6>'+
                                 '<p>'+ data['descripcion'] +'</p>'+
                                 '<div class="d-flex">'+
-                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(' + JSON.stringify(data) + ');">'+
+                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(' + data + ');">'+
                                   '<i class="fa fa-edit fa-1x me-2"></i> Editar</button>'+
                                 '</div>'+
                                 '<div class="d-flex">'+

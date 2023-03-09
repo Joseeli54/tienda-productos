@@ -62,7 +62,7 @@
           <a class="nav-link" href="productos">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Almacenes</a>
+          <a class="nav-link" href="almacenes">Almacenes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Nosotros</a>

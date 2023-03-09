@@ -28,6 +28,15 @@
               <input class="form-control" id="putMoneda" name="moneda">
             </div>
             <div class="mb-3">
+              <label for="putIdAlmacen" class="col-form-label">Asignar un Almacén</label>
+              <select id="putIdAlmacen" name="id_almacen" class="form-select">
+                  <option selected>Seleccione un almacén para el producto</option>
+                @foreach($almacenes as $almacen)
+                  <option value="{{ $almacen->id }}"> Almacén numero {{ $almacen->numero }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
               <label for="descripcion" class="col-form-label">Descripción del Producto</label>
               <textarea class="form-control" id="putDescripcion" name="descripcion"></textarea>
             </div>
@@ -69,6 +78,7 @@
        document.getElementById('putDescripcion').value = product.descripcion;
        document.getElementById('putId').value = product.id;
        document.getElementById('putImagenText').value = product.imagen;
+       document.getElementById('putIdAlmacen').value = product.id_almacen;
        
        document.getElementById('editImgOutput').src = location.origin + '/insertado/producto/' + product.imagen;
        document.getElementById('editImgOutput').style.display = "block";
@@ -127,6 +137,7 @@
       formData.append('tipo', document.getElementById('putTipo').value);
       formData.append('moneda', document.getElementById('putMoneda').value);
       formData.append('descripcion', document.getElementById('putDescripcion').value);
+      formData.append('id_almacen', document.getElementById('putIdAlmacen').value);
       formData.append('_method', 'PUT');
 
       axios.post("/productos/" + document.getElementById('putId').value, formData)
@@ -136,12 +147,15 @@
 
                   console.log(res);
 
-                  document.getElementById('codigo').value = '';
-                  document.getElementById('nombre').value = '';
-                  document.getElementById('precio').value = '';
-                  document.getElementById('tipo').value = '';
-                  document.getElementById('moneda').value = '';
-                  document.getElementById('descripcion').value = '';
+                  document.getElementById('putCodigo').value = '';
+                  document.getElementById('putNombre').value = '';
+                  document.getElementById('putPrecio').value = '';
+                  document.getElementById('putTipo').value = '';
+                  document.getElementById('putMoneda').value = '';
+                  document.getElementById('putDescripcion').value = '';
+                  document.getElementById('putId').value = '';
+                  document.getElementById('putImagenText').value = '';
+                  document.getElementById('putIdAlmacen').value = '';
                   $('#cerrarModalProductoEdit').click();
 
                   location.reload();
