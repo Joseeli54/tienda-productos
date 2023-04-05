@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Almacen;
 use App\Models\Movimiento;
+use App\Models\Marca;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -23,8 +24,10 @@ class ProductController extends Controller
                     LEFT JOIN movimiento m ON p.id = m.id_producto
                     ORDER BY p.id DESC"));
         $almacenes = Almacen::all();
+        $marcas = Marca::all();
         return view('products.product-index', ["products" => $products, 
-                                               "almacenes" => $almacenes]);
+                                               "almacenes" => $almacenes,
+                                               "marcas" => $marcas]);
     }
 
     /**
@@ -64,6 +67,7 @@ class ProductController extends Controller
         $product->moneda = $request->moneda;
         $product->tipo = $request->tipo;
         $product->descripcion = $request->descripcion;
+        $product->id_marca = $request->id_marca;
         $product->imagen = $name;
 
         $product->save();  
@@ -73,6 +77,8 @@ class ProductController extends Controller
         $movimiento->id_producto = $product->id;
 
         $movimiento->save();
+
+        $product->id_almacen = $request->id_almacen;
 
         return [
             "inserted" => 1,
@@ -156,7 +162,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        DB::table('movimiento')->where('id_producto', $id)->delete();
         Product::destroy($id);
+
         return redirect('/productos');
     }
 }

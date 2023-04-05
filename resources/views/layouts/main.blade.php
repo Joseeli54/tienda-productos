@@ -10,11 +10,13 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js') }}"></script>
+    <script src="{{ asset('https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('https://unpkg.com/axios/dist/axios.min.js') }}"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos-propios.css') }}" rel="stylesheet">
+    <link href="{{ asset('https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -60,6 +62,12 @@
       <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="productos">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="marcas">Marcas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="unidad-medidas">Unidades de Medida</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="almacenes">Almacenes</a>

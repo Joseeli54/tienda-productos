@@ -29,10 +29,19 @@
             </div>
             <div class="mb-3">
               <label for="putIdAlmacen" class="col-form-label">Asignar un Almacén</label>
-              <select id="putIdAlmacen" name="id_almacen" class="form-select">
+              <select id="putIdAlmacen" name="putIdAlmacen" class="form-select">
                   <option selected>Seleccione un almacén para el producto</option>
                 @foreach($almacenes as $almacen)
                   <option value="{{ $almacen->id }}"> Almacén numero {{ $almacen->numero }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="putIdMarca" class="col-form-label">Marca del Producto</label>
+              <select id="putIdMarca" name="putIdMarca" class="form-select">
+                  <option selected>Seleccione la marca del producto</option>
+                @foreach($marcas as $marca)
+                  <option value="{{ $marca->id }}"> {{ $marca->nombre }}</option>
                 @endforeach
               </select>
             </div>
@@ -69,18 +78,19 @@
     <script type="text/javascript">
     var element = document.getElementById("updateProducto");
 
-    function llenarForm(product){
-       document.getElementById('putCodigo').value = product.codigo;
-       document.getElementById('putNombre').value = product.nombre;
-       document.getElementById('putPrecio').value = product.precio;
-       document.getElementById('putTipo').value = product.tipo;
-       document.getElementById('putMoneda').value = product.moneda;
-       document.getElementById('putDescripcion').value = product.descripcion;
-       document.getElementById('putId').value = product.id;
-       document.getElementById('putImagenText').value = product.imagen;
-       document.getElementById('putIdAlmacen').value = product.id_almacen;
+    function llenarForm(codigo, nombre, precio, tipo, moneda, descripcion, id, imagen, id_almacen, id_marca){
+       document.getElementById('putCodigo').value = codigo;
+       document.getElementById('putNombre').value = nombre;
+       document.getElementById('putPrecio').value = precio;
+       document.getElementById('putTipo').value = tipo;
+       document.getElementById('putMoneda').value = moneda;
+       document.getElementById('putDescripcion').value = descripcion;
+       document.getElementById('putId').value = id;
+       document.getElementById('putImagenText').value = imagen;
+       document.getElementById('putIdAlmacen').value = id_almacen;
+       document.getElementById('putIdMarca').value = id_marca;
        
-       document.getElementById('editImgOutput').src = location.origin + '/insertado/producto/' + product.imagen;
+       document.getElementById('editImgOutput').src = location.origin + '/insertado/producto/' + imagen;
        document.getElementById('editImgOutput').style.display = "block";
     }
 
@@ -138,6 +148,7 @@
       formData.append('moneda', document.getElementById('putMoneda').value);
       formData.append('descripcion', document.getElementById('putDescripcion').value);
       formData.append('id_almacen', document.getElementById('putIdAlmacen').value);
+      formData.append('id_marca', document.getElementById('putIdMarca').value);
       formData.append('_method', 'PUT');
 
       axios.post("/productos/" + document.getElementById('putId').value, formData)
@@ -156,6 +167,7 @@
                   document.getElementById('putId').value = '';
                   document.getElementById('putImagenText').value = '';
                   document.getElementById('putIdAlmacen').value = '';
+                  document.getElementById('putIdMarca').value = '';
                   $('#cerrarModalProductoEdit').click();
 
                   location.reload();

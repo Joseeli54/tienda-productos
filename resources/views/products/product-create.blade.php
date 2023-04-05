@@ -39,6 +39,16 @@
             </div>
 
             <div class="mb-3">
+              <label for="id_marca" class="col-form-label">Marca del Producto</label>
+              <select id="id_marca" name="id_marca" class="form-select">
+                  <option selected>Seleccione la marca del producto</option>
+                @foreach($marcas as $marca)
+                  <option value="{{ $marca->id }}"> {{ $marca->nombre }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class="mb-3">
               <label for="descripcion" class="col-form-label">Descripción del Producto</label>
               <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
             </div>
@@ -83,6 +93,7 @@
       formData.append('moneda', document.getElementById('moneda').value);
       formData.append('descripcion', document.getElementById('descripcion').value);
       formData.append('id_almacen', document.getElementById('id_almacen').value);
+      formData.append('id_marca', document.getElementById('id_marca').value);
 
       axios.post("/productos", formData)
           .then(function(res) {
@@ -93,7 +104,7 @@
                   var urlImagen = location.origin + '/insertado/producto/' + data['imagen']; 
 
                   $('#contenedorProductos').prepend(
-                      '<div class="col-md-3 col-12">'+
+                      '<div class="col-md-3 col-12 my-3">'+
                         '<div class="card">'+
                             '<div class="card-header text-center">'+
                               '<h3>'+ data['nombre'] +'</h3>'+
@@ -107,7 +118,7 @@
                                 '<h6><b>'+ data['precio'] +' '+ data['moneda'] +'</b></h6>'+
                                 '<p>'+ data['descripcion'] +'</p>'+
                                 '<div class="d-flex">'+
-                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(' + data + ');">'+
+                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(\'' + data['codigo'] + '\',\'' + data['nombre'] + '\',\'' + data['precio'] + '\',\'' + data['tipo'] + '\',\'' + data['moneda'] + '\',\'' + data['descripcion'] + '\',\'' + data['id'] + '\',\'' + data['imagen'] + '\', \'' + data['id_almacen'] + '\', \'' + data['id_marca'] + '\');">'+
                                   '<i class="fa fa-edit fa-1x me-2"></i> Editar</button>'+
                                 '</div>'+
                                 '<div class="d-flex">'+
