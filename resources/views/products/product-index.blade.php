@@ -4,9 +4,9 @@
 
 @section('contenido')
 
-	<div class="container my-4 mx-md-5">
-    		<div class="my-2 text-primary">
-                <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addProducto"> 
+	<div class="container-fluid my-4 px-md-4">
+    		<div class="my-2 mx-md-4 text-primary">
+                <a style="cursor: pointer; font-size: 18px!important;" data-bs-toggle="modal" data-bs-target="#addProducto"> 
             		<i  class="fa fa-plus fa-1x"></i> Crear Producto
                 </a>
             </div>
@@ -19,7 +19,7 @@
 
             <div id="contenedorProductos" class="row font-size-page my-3">
 				@foreach($products as $product)
-					<div class="col-md-3 col-12">
+					<div class="col-md-3 col-12 my-3">
 						<div class="card">
 							<div class="card-header text-center">
 								<h3>{{ $product->nombre }}</h3>
@@ -35,7 +35,8 @@
 								<p>{{ $product->descripcion }}</p>
 
 								<div class="d-flex">
-									<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm({{ json_encode($product) }});"><i class="fa fa-edit fa-1x me-2"></i> Editar</button>
+									<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" 
+									onclick="llenarForm('{{ $product->codigo }}','{{ $product->nombre }}','{{ $product->precio }}','{{ $product->tipo }}','{{ $product->moneda }}','{{ $product->descripcion }}','{{ $product->id }}','{{ $product->imagen }}','{{ $product->id_almacen }}', '{{ $product->id_marca }}');"><i class="fa fa-edit fa-1x me-2"></i> Editar</button>
 								</div>
 
 								<div class="d-flex">

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Almacen;
-use App\Models\Person;
+use App\Models\Marca;
 use Illuminate\Support\Facades\DB;
 
-class AlmacenController extends Controller
+class MarcaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,10 @@ class AlmacenController extends Controller
      */
     public function index()
     {
-        //
+        $marcas = DB::select(DB::raw("  SELECT *
+                                        FROM marca
+                                        ORDER BY id DESC"));
+        return view('marcas.marca-index', ["marcas" => $marcas]);
     }
 
     /**
@@ -26,23 +28,7 @@ class AlmacenController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    public function crearAlmacen(Request $request){
-
-        $almacen = new Almacen();
-
-        $almacen->numero = $request->numero;
-        $almacen->tipo = $request->tipo;
-        $almacen->descripcion = $request->descripcion;
-
-        $almacen->save();                 
-
-        return [
-            "inserted" => 1,
-            "almacen" => $almacen
-        ];
+        return view('marcas.marca-create');
     }
 
     /**
@@ -53,7 +39,15 @@ class AlmacenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $marca = new Marca();
+
+        $marca->nombre = $request->nombre;
+        $marca->pais = $request->pais;
+        $marca->descripcion = $request->descripcion;
+
+        $marca->save();   
+
+        return redirect('/marcas');
     }
 
     /**
@@ -98,8 +92,6 @@ class AlmacenController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('movimiento')->where('id_almacen', $id)->delete();
-        Almacen::destroy($id);
-        return redirect('/');
+        Marca::destroy($id);
     }
 }

@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Product extends Model
+class Movimiento extends Model
 {
     //definiendo que tabla se refierfe este modelo
-    protected $table = 'producto';
+    protected $table = 'movimiento';
     //definiendo el nombre del codigo de este modelo
-    protected $primaryKey = "id";
+    protected $primaryKey = ['id_almacen', 'id_producto'];
     //como la clave primaria es alfanumerica se debe coloar para que llene bien la N a N
-    public $incrementing = true;
+    public $incrementing = false;
 
-    //definiendo los atributos actualizables
-    protected $fillable = ['codigo','nombre','precio','tipo','moneda','descripcion','imagen','id_marca'];
-
+    //Disable at_update and at_create
+    public $timestamps = true;
 }

@@ -30,6 +30,7 @@ Auth::routes();
 Route::post('/almacen','AlmacenController@crearAlmacen');
 Route::resource('almacenes', 'AlmacenController');
 Route::resource('productos', 'ProductController');
+Route::resource('marcas', 'MarcaController');
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
