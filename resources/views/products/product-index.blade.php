@@ -33,7 +33,9 @@
 								<h6>Codigo <b>#{{ $product->codigo }}</b> </h6>
 								<h6><b> {{ $product->precio }} {{ $product->moneda }} </b></h6>
 								<p>{{ $product->descripcion }}</p>
-
+								<div class="text-center my-3">
+									{!! QrCode::size(85)->generate('http://localhost:8000/productos/'.$product->id ) !!}
+								</div>
 								<div class="d-flex">
 									<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" 
 									onclick="llenarForm('{{ $product->codigo }}','{{ $product->nombre }}','{{ $product->precio }}','{{ $product->tipo }}','{{ $product->moneda }}','{{ $product->descripcion }}','{{ $product->id }}','{{ $product->imagen }}','{{ $product->id_almacen }}', '{{ $product->id_marca }}');"><i class="fa fa-edit fa-1x me-2"></i> Editar</button>

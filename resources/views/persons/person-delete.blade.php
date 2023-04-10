@@ -11,7 +11,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <form method="POST" class="my-auto" id="formularioEliminarAlmacen" action="/almacenes/">
+        <form method="POST" class="my-auto" id="formularioEliminarAlmacen" action="/persona/">
             @method('DELETE')
             @csrf
             <button type="submit" class="btn btn-danger">
