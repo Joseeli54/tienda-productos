@@ -38,7 +38,7 @@ aria-hidden="true">
         formData.append('tipo', document.getElementById('tipo').value);
         formData.append('descripcion', document.getElementById('descripcion').value);
 
-        axios.post("/almacen", formData)
+        axios.post("/crearalmacen", formData)
             .then(function(res) {
                 if(res.status == 200){
                     let data = res.data.almacen;

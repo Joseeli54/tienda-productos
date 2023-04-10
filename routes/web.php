@@ -27,11 +27,24 @@ Route::post('register', 'Auth\RegisterController@create')->name('register');
 Auth::routes();
 
 //Rutas para crear, modificar, eliminar y buscar el almacen
-Route::post('/almacen','AlmacenController@crearAlmacen');
-Route::resource('almacenes', 'AlmacenController');
-Route::resource('productos', 'ProductController');
-Route::resource('marcas', 'MarcaController');
 
+
+//Almacenes
+Route::resource('almacen', 'AlmacenController');
+Route::get('almacen', 'AlmacenController@index')->name('almacen');
+Route::delete('/deletealmacen/{id}', 'AlmacenController@deleteAlmacen')->name('deletealmacen');
+Route::post('/crearalmacen','AlmacenController@crearAlmacen');
+
+//Productos
+Route::resource('productos', 'ProductController');
+
+//Marcas
+Route::resource('marcas', 'MarcaController');
+Route::get('marcas', 'MarcaController@index')->name('marcas');
+
+//Unidad Medida
+Route::resource('unidadmedida', 'UnidadMedidaController');
+Route::get('unidadmedida', 'UnidadMedidaController@index')->name('unidadmedida');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

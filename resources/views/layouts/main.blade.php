@@ -64,13 +64,13 @@
           <a class="nav-link" href="productos">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="marcas">Marcas</a>
+          <a class="nav-link" href="{{ route('marcas') }}">Marcas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="unidad-medidas">Unidades de Medida</a>
+          <a class="nav-link" href="{{ route('unidadmedida') }}">Unidades de Medida</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="almacenes">Almacenes</a>
+          <a class="nav-link" href="{{ route('almacen') }}">Almacenes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Nosotros</a>

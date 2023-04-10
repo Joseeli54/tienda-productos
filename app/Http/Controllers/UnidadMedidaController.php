@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Marca;
+use App\Models\UnidadMedida;
 use Illuminate\Support\Facades\DB;
 
-class MarcaController extends Controller
+
+class UnidadMedidaController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -18,7 +20,6 @@ class MarcaController extends Controller
         $this->middleware('auth');
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -26,10 +27,11 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        $marcas = DB::select(DB::raw("  SELECT *
-                                        FROM marca
-                                        ORDER BY id DESC"));
-        return view('marcas.marca-index', ["marcas" => $marcas]);
+        $unidadmedida = DB::select(DB::raw("SELECT *
+                                            FROM unidadmedida
+                                            ORDER BY id DESC"));
+
+        return view('unidadmedida.unidadmedida-index', ["unidadmedida" => $unidadmedida]);
     }
 
     /**
@@ -39,7 +41,15 @@ class MarcaController extends Controller
      */
     public function create()
     {
-        return view('marcas.marca-create');
+        $productos = DB::select(DB::raw("SELECT *
+                                            FROM producto
+                                            ORDER BY id DESC"));
+        $unidades = ["Longitud", "Masa", "Volumen"];
+        $abreviaturas = ["Longitud" => "m", "Masa" => "kg", "Volumen" => "m2"];
+
+        return view('unidadmedida.unidadmedida-create', ["productos" => $productos,
+                                                         "unidades" => $unidades, 
+                                                         "abreviaturas" => $abreviaturas]);
     }
 
     /**
@@ -50,15 +60,17 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        $marca = new Marca();
+        $unidadmedida = new UnidadMedida();
 
-        $marca->nombre = $request->nombre;
-        $marca->pais = $request->pais;
-        $marca->descripcion = $request->descripcion;
+        $unidadmedida->nombre = $request->nombre;
+        $unidadmedida->tipo = $request->tipo;
+        $unidadmedida->abreviatura = $request->abreviatura;
+        $unidadmedida->id_producto = $request->id_producto;
+        $unidadmedida->valor = $request->valor;
 
-        $marca->save();   
+        $unidadmedida->save();   
 
-        return redirect('/marcas');
+        return redirect('/unidadmedida');
     }
 
     /**
@@ -78,9 +90,9 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Marca $marca)
+    public function edit($id)
     {
-        return view('marcas.marca-edit',compact('marca'));
+        //
     }
 
     /**
@@ -90,18 +102,9 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Marca $marca)
+    public function update(Request $request, $id)
     {
-        //$marca->fill($request->all());
-        $marca->nombre = $request->nombre;
-        $marca->pais = $request->pais;
-        $marca->descripcion = $request->descripcion;
-
-        $marca->save();
-
-        $marcas = Marca::all();
-
-        return view('marcas.marca-index', compact('marcas'));
+        //
     }
 
     /**
@@ -110,9 +113,8 @@ class MarcaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Marca $marca)
+    public function destroy($id)
     {
-        $marca->delete();
-        return redirect('/marcas');
+        //
     }
 }
