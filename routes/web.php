@@ -37,6 +37,7 @@ Route::post('/crearalmacen','AlmacenController@crearAlmacen');
 
 //Productos
 Route::resource('productos', 'ProductController');
+Route::get('productos', 'ProductController@index')->name('productos');
 
 //Marcas
 Route::resource('marcas', 'MarcaController');

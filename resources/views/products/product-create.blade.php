@@ -27,7 +27,10 @@
               <label for="moneda" class="col-form-label">Moneda</label>
               <input class="form-control" id="moneda" name="moneda">
             </div>
-
+            <div class="mb-3">
+              <label for="cantidad" class="col-form-label">Cantidad</label>
+              <input class="form-control" id="cantidad" name="cantidad">
+            </div>
             <div class="mb-3">
               <label for="id_almacen" class="col-form-label">Asignar un Almacén</label>
               <select id="id_almacen" name="id_almacen" class="form-select">
@@ -94,6 +97,7 @@
       formData.append('descripcion', document.getElementById('descripcion').value);
       formData.append('id_almacen', document.getElementById('id_almacen').value);
       formData.append('id_marca', document.getElementById('id_marca').value);
+      formData.append('cantidad', document.getElementById('cantidad').value);
 
       axios.post("/productos", formData)
           .then(function(res) {
@@ -118,7 +122,7 @@
                                 '<h6><b>'+ data['precio'] +' '+ data['moneda'] +'</b></h6>'+
                                 '<p>'+ data['descripcion'] +'</p>'+
                                 '<div class="d-flex">'+
-                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(\'' + data['codigo'] + '\',\'' + data['nombre'] + '\',\'' + data['precio'] + '\',\'' + data['tipo'] + '\',\'' + data['moneda'] + '\',\'' + data['descripcion'] + '\',\'' + data['id'] + '\',\'' + data['imagen'] + '\', \'' + data['id_almacen'] + '\', \'' + data['id_marca'] + '\');">'+
+                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(\'' + data['codigo'] + '\',\'' + data['nombre'] + '\',\'' + data['precio'] + '\',\'' + data['tipo'] + '\',\'' + data['moneda'] + '\',\'' + data['descripcion'] + '\',\'' + data['id'] + '\',\'' + data['imagen'] + '\', \'' + data['id_almacen'] + '\', \'' + data['id_marca'] + '\', \'' + data['cantidad'] + '\');">'+
                                   '<i class="fa fa-edit fa-1x me-2"></i> Editar</button>'+
                                 '</div>'+
                                 '<div class="d-flex">'+
@@ -136,6 +140,7 @@
                   document.getElementById('precio').value = '';
                   document.getElementById('tipo').value = '';
                   document.getElementById('moneda').value = '';
+                  document.getElementById('cantidad').value = '';
                   document.getElementById('descripcion').value = '';
                   $('#cerrarModalProducto').click();
               }

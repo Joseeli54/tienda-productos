@@ -38,7 +38,7 @@
 								</div>
 								<div class="d-flex">
 									<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" 
-									onclick="llenarForm('{{ $product->codigo }}','{{ $product->nombre }}','{{ $product->precio }}','{{ $product->tipo }}','{{ $product->moneda }}','{{ $product->descripcion }}','{{ $product->id }}','{{ $product->imagen }}','{{ $product->id_almacen }}', '{{ $product->id_marca }}');"><i class="fa fa-edit fa-1x me-2"></i> Editar</button>
+									onclick="llenarForm('{{ $product->codigo }}','{{ $product->nombre }}','{{ $product->precio }}','{{ $product->tipo }}','{{ $product->moneda }}','{{ $product->descripcion }}','{{ $product->id }}','{{ $product->imagen }}','{{ $product->id_almacen }}', '{{ $product->id_marca }}', '{{ $product->cantidad }}');"><i class="fa fa-edit fa-1x me-2"></i> Editar</button>
 								</div>
 
 								<div class="d-flex">
