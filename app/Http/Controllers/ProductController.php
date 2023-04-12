@@ -79,12 +79,13 @@ class ProductController extends Controller
         $product->descripcion = $request->descripcion;
         $product->id_marca = $request->id_marca;
         $product->imagen = $name;
+        $product->cantidad = $request->cantidad;
 
         $product->save();  
 
         $movimiento = new Movimiento();
-        $movimiento->id_almacen = $request->id_almacen;
         $movimiento->id_producto = $product->id;
+        $movimiento->id_almacen = $request->id_almacen;
 
         $movimiento->save();
 

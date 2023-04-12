@@ -15,24 +15,27 @@
                         <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" required>
                     </div>
 
+                    @php $defaultValue = ""; @endphp
                     <div class="form-group my-2">
                       <label for="tipo" class="col-form-label">Tipo de unidad de medida</label>
                       @foreach($unidades as $key => $valor)
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="item-{{$key}}" value="{{ $valor }}" @php if($key == 0){ echo "checked"; } @endphp>
+                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="item-{{$key}}" value="{{ $valor }}" @php if($key == 0){ echo "checked"; $defaultValue = $valor; } @endphp>
                           <label class="form-check-label" for="item-{{$key}}">
                             {{ $valor }}
                           </label>
                         </div>
                       @endforeach
-                      <input type="hidden" id="tipo" name="tipo" class="form-control form-control-lg" required>
+                      <input type="hidden" id="tipo" name="tipo" class="form-control form-control-lg" value="{{ $defaultValue }}" required>
                     </div>
 
                     <div class="form-group my-2">
                       <label for="abreviatura" class="col-form-label">Asignar una abreviatura</label>
                       <select id="abreviatura" name="abreviatura" class="form-select form-select-lg">
                         @foreach($abreviaturas as $key => $abreviatura)
-                          <option style="display: none" name="{{ $key }}" value="{{ $abreviatura }}" class="abreviaturas" @php if($key == 0){ echo "selected"; } @endphp> {{ $abreviatura }} </option>
+                          <option name="{{ $key }}" value="{{ $abreviatura }}" class="abreviaturas" @php if($key == "Longitud"){ echo "selected"; }else{ echo "style='display: none'"; } @endphp> {{ $abreviatura }} </option>
+                        }
+                        }
                         @endforeach
                       </select>
                     </div>
@@ -67,7 +70,6 @@
             if($(this).is(":checked")){
                 //Coloco el tipo de unidad
                 $("#tipo").val($(this).val());
-
                 //Desaparezco el resto de las abreviaturas y solo dejo la seleccionada
                 $(".abreviaturas").css('display', 'none');
                 $('option[name="'+ $(this).val() +'"]').css('display', 'block');

@@ -61,7 +61,7 @@
       @if (Auth::check())
       <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="productos">Productos</a>
+          <a class="nav-link" href="{{ route('productos') }}">Productos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('marcas') }}">Marcas</a>
