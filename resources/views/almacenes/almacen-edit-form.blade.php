@@ -13,18 +13,20 @@
                     @csrf
                     <div class="form-group my-2">
                         <label for="numero">Numero</label>
-                        <input type="text" id="numero" name="numero" class="form-control" value="{{$almacen->numero}}" required>
+                        <input type="text" id="numero" name="numero" class="form-control form-control-lg" value="{{$almacen->numero}}" required>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="tipo">Tipo</label>
-                        <input type="tipo" id="tipo" name="tipo" class="form-control" value="{{$almacen->tipo}}" required>
+                        <input type="tipo" id="tipo" name="tipo" class="form-control form-control-lg" value="{{$almacen->tipo}}" required>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="descripcion">Descripción</label>
-                        <textarea type="descripcion" id="descripcion" name="descripcion" class="form-control">{{$almacen->descripcion}}</textarea>
+                        <textarea type="descripcion" id="descripcion" name="descripcion" class="form-control form-control-lg">{{$almacen->descripcion}}</textarea>
                     </div>
+
+                    <input type="hidden" name="axios" value="0">
 
                     <div class="form-group text-center my-4">
                         <button type="submit" class="btn btn-success btn-lg">Editar</button>

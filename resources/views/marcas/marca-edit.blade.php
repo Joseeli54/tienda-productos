@@ -13,17 +13,17 @@
                     @csrf
                     <div class="form-group my-2">
                         <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" value="{{$marca->nombre}}" required>
+                        <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" value="{{$marca->nombre}}" required>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="pais">Pais</label>
-                        <input type="pais" id="pais" name="pais" class="form-control" value="{{$marca->pais}}" required>
+                        <input type="pais" id="pais" name="pais" class="form-control form-control-lg" value="{{$marca->pais}}" required>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="descripcion">Descripción</label>
-                        <textarea type="descripcion" id="descripcion" name="descripcion" class="form-control">{{$marca->descripcion}}</textarea>
+                        <textarea type="descripcion" id="descripcion" name="descripcion" class="form-control form-control-lg">{{$marca->descripcion}}</textarea>
                     </div>
 
                     <div class="form-group text-center my-4">

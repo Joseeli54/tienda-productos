@@ -40,7 +40,7 @@
                                             <i class="fa fa-trash fa-1x me-2"></i> Eliminar
                                         </a>
 
-                                        <a class="mx-2 my-auto text-decoration-none" style="cursor: pointer;">
+                                        <a class="mx-2 my-auto text-decoration-none" data-bs-toggle="modal" data-bs-target="#editAlmacen" style="cursor: pointer;" onclick="llenarFormAlmacen('{{ $almacen->id }}','{{ $almacen->numero }}','{{ $almacen->tipo }}', '{{ $almacen->descripcion }}');">
                                             <i class="fa fa-edit fa-1x me-2"></i>Editar
                                         </a>
                                     </div>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="d-flex my-2">
-                    <a class="btn mx-auto ng-white" style="border: 1px solid;">Ver mas...</a>
+                    <a class="btn mx-auto ng-white" style="border: 1px solid;" href="{{ route('almacen') }}">Ver mas...</a>
                 </div>
             </div>
             <div class="col-md-4">

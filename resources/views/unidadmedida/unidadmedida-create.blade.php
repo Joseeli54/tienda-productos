@@ -34,8 +34,6 @@
                       <select id="abreviatura" name="abreviatura" class="form-select form-select-lg">
                         @foreach($abreviaturas as $key => $abreviatura)
                           <option name="{{ $key }}" value="{{ $abreviatura }}" class="abreviaturas" @php if($key == "Longitud"){ echo "selected"; }else{ echo "style='display: none'"; } @endphp> {{ $abreviatura }} </option>
-                        }
-                        }
                         @endforeach
                       </select>
                     </div>

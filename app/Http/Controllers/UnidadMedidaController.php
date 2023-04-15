@@ -90,9 +90,19 @@ class UnidadMedidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UnidadMedida $unidadmedida)
     {
-        //
+        $productos = DB::select(DB::raw("SELECT *
+                                            FROM producto
+                                            ORDER BY id DESC"));
+        $unidades = ["Longitud", "Masa", "Volumen"];
+        $abreviaturas = ["Longitud" => "m", "Masa" => "kg", "Volumen" => "m2"];
+
+        return view('unidadmedida.unidadmedida-edit', ["productos" => $productos,
+                                                       "unidades" => $unidades, 
+                                                       "abreviaturas" => $abreviaturas,
+                                                       "unidadmedida" => $unidadmedida
+                                                      ]);
     }
 
     /**
@@ -102,9 +112,19 @@ class UnidadMedidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, UnidadMedida $unidadmedida)
     {
-        //
+        $unidadmedida->nombre = $request->nombre;
+        $unidadmedida->tipo = $request->tipo;
+        $unidadmedida->abreviatura = $request->abreviatura;
+        $unidadmedida->id_producto = $request->id_producto;
+        $unidadmedida->valor = $request->valor;
+
+        $unidadmedida->save();
+
+        $unidadmedida = UnidadMedida::all();
+
+        return view('unidadmedida.unidadmedida-index', compact('unidadmedida'));
     }
 
     /**

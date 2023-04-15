@@ -105,7 +105,41 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = DB::select(DB::raw("
+                    SELECT p.id,
+                           p.nombre,
+                           p.codigo,
+                           p.cantidad,
+                           p.estado,
+                           p.precio,
+                           p.moneda,
+                           p.tipo,
+                           p.descripcion,
+                           p.imagen,
+                           m.id_almacen,
+                           p.id_marca,
+                           a.numero,
+                           ma.nombre AS marca
+                    FROM producto p 
+                    LEFT JOIN movimiento m ON p.id = m.id_producto
+                    LEFT JOIN almacen a ON a.id = m.id_almacen
+                    LEFT JOIN marca ma ON ma.id = p.id_marca
+                    WHERE p.id = $id
+                    ORDER BY p.id DESC"));
+
+        $unidadmedida = DB::select(DB::raw("
+                    SELECT um.*
+                    FROM unidadmedida um
+                    WHERE um.id_producto = $id
+                    ORDER BY um.id DESC"));
+
+        $almacenes = Almacen::all();
+        $marcas = Marca::all();
+
+        return view('products.product-show', ["product" => $product[0], 
+                                               "unidadmedida" => $unidadmedida, 
+                                               "almacenes" => $almacenes,
+                                               "marcas" => $marcas]);
     }
 
     /**

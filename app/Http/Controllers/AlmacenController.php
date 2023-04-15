@@ -117,7 +117,14 @@ class AlmacenController extends Controller
 
         $almacenes = Almacen::all();
 
-        return view('almacenes.almacen-index', compact('almacenes'));
+        if($request->axios == 0){
+            return view('almacenes.almacen-index', compact('almacenes'));
+        }else{
+            return [
+                "updated" => 1,
+                "almacenes" => $almacenes
+            ]; 
+        }
     }
 
     /**
