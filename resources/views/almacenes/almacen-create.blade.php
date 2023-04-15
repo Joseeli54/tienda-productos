@@ -9,15 +9,15 @@ aria-hidden="true">
       <div class="modal-body">
           <div class="mb-3">
             <label for="numero" class="col-form-label">Numero</label>
-            <input type="number" class="form-control" id="numero" name="numero">
+            <input type="number" class="form-control form-control-lg" id="numero" name="numero">
           </div>
           <div class="mb-3">
             <label for="tipo" class="col-form-label">Tipo</label>
-            <input class="form-control" id="tipo" name="tipo">
+            <input class="form-control form-control-lg" id="tipo" name="tipo">
           </div>
           <div class="mb-3">
             <label for="descripcion" class="col-form-label">Descripción del Almacen</label>
-            <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+            <textarea class="form-control form-control-lg" id="descripcion" name="descripcion"></textarea>
           </div>
       </div>
       <div class="modal-footer">
@@ -51,7 +51,7 @@ aria-hidden="true">
                             '<h6><b>Tipo: </b> '+ data['tipo'] + '</h6>'+
                             '<p>'+ data['descripcion'] +'</p>'+
                         '</div>'+
-                        '<div class="col-md-3 col-12 d-flex">'+
+                        '<div class="col-md col-12 d-flex">'+
                             '<a class="text-danger text-decoration-none mx-2 my-auto delete-button-almacen" data-value="'+data['id']+'" data-bs-toggle="modal" data-bs-target="#deleteAlmacen" style="cursor: pointer;" onclick="setURLDeleteFormAlmacen(this)">'+
                                 '<i class="fa fa-trash fa-1x me-2"></i> Eliminar'+
                             '</a>'+

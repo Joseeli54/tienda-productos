@@ -12,17 +12,17 @@
                     @csrf
                     <div class="form-group my-2">
                         <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                        <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" required>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="pais">Pais</label>
-                        <input type="pais" id="pais" name="pais" class="form-control" required>
+                        <input type="pais" id="pais" name="pais" class="form-control form-control-lg" required>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="descripcion">Descripción</label>
-                        <textarea type="descripcion" id="descripcion" name="descripcion" class="form-control"></textarea>
+                        <textarea type="descripcion" id="descripcion" name="descripcion" class="form-control form-control-lg"></textarea>
                     </div>
 
                     <div class="form-group text-center my-4">
