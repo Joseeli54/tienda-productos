@@ -8,7 +8,9 @@ use App\Models\Almacen;
 use App\Models\Movimiento;
 use App\Models\Marca;
 use Illuminate\Support\Facades\DB;
-
+//Las 2 lineas se utilizan para el envió de mails
+use Illuminate\Support\Facades\Mail;
+use App\Mail\nuevoProducto;
 class ProductController extends Controller
 {
     /**
@@ -90,7 +92,8 @@ class ProductController extends Controller
         $movimiento->save();
 
         $product->id_almacen = $request->id_almacen;
-
+        //La linea se utilizan para el envió de mails
+        Mail::to('javiloria100sinimportar@gmail.com')->send(new nuevoProducto());
         return [
             "inserted" => 1,
             "product" => $product
