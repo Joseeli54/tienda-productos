@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addPersonaLabel">Crear Almacén</h5>
+                <h5 class="modal-title" id="addPersonaLabel">Crear Persona</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body container-fluid">
@@ -82,12 +82,70 @@
 
                 <div class="row mb-3">
                     <div class="col-md-12 d-flex">
-                        <button type="submit" class="btn btn-primary mx-auto">
+                        <button type="submit" class="btn btn-primary ms-auto me-2" id="createPerson">
                             Crear Usuario
                         </button>
+
+                        <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal" id="cerrarModalPersona">Cerrar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+  var element = document.getElementById("createPerson");
+
+  element.addEventListener('click',
+    function(e) {
+        let formData = new FormData();
+        formData.append('nombre', document.getElementById('nombre').value);
+        formData.append('apellido', document.getElementById('apellido').value);
+        formData.append('correo', document.getElementById('correo').value);
+        formData.append('doc_persona', document.getElementById('doc_persona').value);
+        formData.append('username', document.getElementById('username').value);
+        formData.append('telefono', document.getElementById('telefono').value);
+        formData.append('password', document.getElementById('password').value);
+        formData.append('fec_nac', document.getElementById('fec_nac').value);
+
+        axios.post("/crearpersona", formData)
+            .then(function(res) {
+                if(res.status == 200){
+                    let data = res.data.person;
+                    $('#personaEmpty').hide();
+
+                    $('#contenedorPersonas').prepend(
+                        '<hr>'+
+                        '<div class="col-md-12 col-12">'+
+                            '<h6>'+ data['nombre'] + ' '+ data['apellido'] + '</h6>'+
+                            '<h6><b>Nombre de Usuario: </b> '+ data['username'] + '</h6>'+
+                            '<p> Fecha de creación: '+ data['created_at'] +'</p>'+
+                        '</div>'+
+                        '<div class="col-md-12 col-12 d-flex">'+
+                            '<a class="text-danger text-decoration-none mx-auto my-auto delete-button-persona" data-value="'+data['id']+'" data-bs-toggle="modal" data-bs-target="#deletePersona" style="cursor: pointer;" onclick="setURLDeleteFormAlmacen(this)">'+
+                                '<i class="fa fa-trash fa-1x me-2"></i> Eliminar'+
+                            '</a>'+
+                            '<a class="mx-auto my-auto text-decoration-none" style="cursor: pointer;">'+
+                                '<i class="fa fa-edit fa-1x me-2"></i> Editar'+
+                            '</a>'+
+                        '</div>'
+                    );
+
+                    document.getElementById('nombre').value = "";
+                    document.getElementById('apellido').value = "";
+                    document.getElementById('correo').value = "";
+                    document.getElementById('doc_persona').value = "";
+                    document.getElementById('username').value = "";
+                    document.getElementById('telefono').value = "";
+                    document.getElementById('password').value = "";
+                    document.getElementById('fec_nac').value = "";
+                    $('#cerrarModalPersona').click();
+                }
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+
+    }, false);
+</script>

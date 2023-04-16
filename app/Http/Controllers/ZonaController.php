@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Almacen;
+use App\Models\Zona;
+use Illuminate\Support\Facades\DB;
+
 
 class ZonaController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +28,11 @@ class ZonaController extends Controller
      */
     public function index()
     {
-        //
+        $zonas = DB::select(DB::raw("  SELECT z.id, z.numero, z.descripcion, z.id_almacen, a.numero AS almacen
+                                        FROM zona z
+                                        LEFT JOIN almacen a ON a.id = z.id_almacen
+                                        ORDER BY id DESC"));
+        return view('zona.zona-index', ["zonas" => $zonas]);
     }
 
     /**
@@ -23,7 +42,8 @@ class ZonaController extends Controller
      */
     public function create()
     {
-        //
+        $almacenes = Almacen::all();
+        return view('zona.zona-create', ["almacenes" => $almacenes]);
     }
 
     /**
@@ -34,7 +54,15 @@ class ZonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $zona = new Zona();
+
+        $zona->numero = $request->numero;
+        $zona->id_almacen = $request->id_almacen;
+        $zona->descripcion = $request->descripcion;
+
+        $zona->save();   
+
+        return redirect('/zona');
     }
 
     /**
@@ -54,9 +82,13 @@ class ZonaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Zona $zona)
     {
-        //
+
+        $almacenes = Almacen::all();
+
+        return view('zona.zona-edit', ["zona" => $zona, 
+                                            "almacenes" => $almacenes]);
     }
 
     /**
@@ -66,9 +98,20 @@ class ZonaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Zona $zona)
     {
-        //
+        $zona->numero = $request->numero;
+        $zona->id_almacen = $request->id_almacen;
+        $zona->descripcion = $request->descripcion;
+
+        $zona->save();
+
+        $zonas = DB::select(DB::raw("  SELECT z.id, z.numero, z.descripcion, z.id_almacen, a.numero AS almacen
+                                        FROM zona z
+                                        LEFT JOIN almacen a ON a.id = z.id_almacen
+                                        ORDER BY id DESC"));
+
+        return view('zona.zona-index', compact('zonas'));
     }
 
     /**
@@ -77,8 +120,11 @@ class ZonaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Zona $zona)
     {
-        //
+        DB::table('producto')->where('id_zona', $zona->id)->delete();
+        $zona->delete();
+
+        return redirect('/zona');
     }
 }

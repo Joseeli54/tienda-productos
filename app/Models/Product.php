@@ -15,6 +15,6 @@ class Product extends Model
     public $incrementing = true;
 
     //definiendo los atributos actualizables
-    protected $fillable = ['codigo','nombre','precio','tipo','moneda','descripcion','imagen','id_marca', 'cantidad'];
+    protected $fillable = ['codigo','nombre','precio','tipo','moneda','descripcion','imagen','id_marca', 'cantidad', 'id_zona'];
 
 }

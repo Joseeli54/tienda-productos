@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Crear Marca')
+@section('title', 'Crear Zona')
 
 @section('contenido')
 
@@ -8,16 +8,21 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             <div class="card font-size-title p-3">
-                <form action="/marcas" class="form-group" method="POST" enctype="multipart/form-data">
+                <form action="/zona" class="form-group" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group my-2">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" required>
+                        <label for="numero">Numero</label>
+                        <input type="number" id="numero" name="numero" class="form-control form-control-lg" required>
                     </div>
 
                     <div class="form-group my-2">
-                        <label for="pais">Pais</label>
-                        <input type="text" id="pais" name="pais" class="form-control form-control-lg" required>
+                      <label for="id_almacen" class="col-form-label">Asignar un Almacén</label>
+                      <select id="id_almacen" name="id_almacen" class="form-select form-select-lg">
+                        <option selected>Seleccione un almacén para el producto</option>
+                        @foreach($almacenes as $almacen)
+                          <option value="{{ $almacen->id }}"> Almacén numero {{ $almacen->numero }}</option>
+                        @endforeach
+                      </select>
                     </div>
 
                     <div class="form-group my-2">

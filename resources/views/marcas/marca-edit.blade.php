@@ -18,7 +18,7 @@
 
                     <div class="form-group my-2">
                         <label for="pais">Pais</label>
-                        <input type="pais" id="pais" name="pais" class="form-control form-control-lg" value="{{$marca->pais}}" required>
+                        <input type="text" id="pais" name="pais" class="form-control form-control-lg" value="{{$marca->pais}}" required>
                     </div>
 
                     <div class="form-group my-2">

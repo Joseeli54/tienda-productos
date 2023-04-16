@@ -9,41 +9,41 @@
         <div class="modal-body">
             <div class="mb-3">
               <label for="codigo" class="col-form-label">Codigo</label>
-              <input type="number" class="form-control" id="codigo" name="codigo">
+              <input type="number" class="form-control form-control-lg" id="codigo" name="codigo">
             </div>
             <div class="mb-3">
               <label for="nombre" class="col-form-label">Nombre</label>
-              <input class="form-control" id="nombre" name="nombre">
+              <input class="form-control form-control-lg" id="nombre" name="nombre">
             </div>
             <div class="mb-3">
               <label for="precio" class="col-form-label">Precio</label>
-              <input type="number" class="form-control" id="precio" name="precio" step="any">
+              <input type="number" class="form-control form-control-lg" id="precio" name="precio" step="any">
             </div>
             <div class="mb-3">
               <label for="tipo" class="col-form-label">Tipo</label>
-              <input class="form-control" id="tipo" name="tipo">
+              <input class="form-control form-control-lg" id="tipo" name="tipo">
             </div>
             <div class="mb-3">
               <label for="moneda" class="col-form-label">Moneda</label>
-              <input class="form-control" id="moneda" name="moneda">
+              <input class="form-control form-control-lg" id="moneda" name="moneda">
             </div>
             <div class="mb-3">
               <label for="cantidad" class="col-form-label">Cantidad</label>
-              <input class="form-control" id="cantidad" name="cantidad">
+              <input class="form-control form-control-lg" id="cantidad" name="cantidad">
             </div>
             <div class="mb-3">
               <label for="id_almacen" class="col-form-label">Asignar un Almacén</label>
-              <select id="id_almacen" name="id_almacen" class="form-select">
+              <select id="id_almacen" name="id_almacen" class="form-select form-select-lg">
                   <option selected>Seleccione un almacén para el producto</option>
                 @foreach($almacenes as $almacen)
-                  <option value="{{ $almacen->id }}"> Almacén numero {{ $almacen->numero }}</option>
+                  <option value="{{ $almacen->id }}"> Almacén #{{ $almacen->numero }}</option>
                 @endforeach
               </select>
             </div>
 
             <div class="mb-3">
               <label for="id_marca" class="col-form-label">Marca del Producto</label>
-              <select id="id_marca" name="id_marca" class="form-select">
+              <select id="id_marca" name="id_marca" class="form-select form-select-lg">
                   <option selected>Seleccione la marca del producto</option>
                 @foreach($marcas as $marca)
                   <option value="{{ $marca->id }}"> {{ $marca->nombre }}</option>
@@ -52,8 +52,18 @@
             </div>
 
             <div class="mb-3">
+              <label for="id_zona" class="col-form-label">Zona del Producto</label>
+              <select id="id_zona" name="id_zona" class="form-select form-select-lg">
+                  <option selected>Seleccione la zona donde estará el producto</option>
+                @foreach($zonas as $zona)
+                  <option style="display: none;" value="{{ $zona->id }}" class="almacen-{{ $zona->id_almacen }} zonas-option"> Zona #{{ $zona->numero }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class="mb-3">
               <label for="descripcion" class="col-form-label">Descripción del Producto</label>
-              <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+              <textarea class="form-control form-control-lg" id="descripcion" name="descripcion"></textarea>
             </div>
             <div class="form-group">
               <label for="imagen" class="col-form-label">Agregar imagen del producto</label>
@@ -97,6 +107,7 @@
       formData.append('descripcion', document.getElementById('descripcion').value);
       formData.append('id_almacen', document.getElementById('id_almacen').value);
       formData.append('id_marca', document.getElementById('id_marca').value);
+      formData.append('id_zona', document.getElementById('id_zona').value);
       formData.append('cantidad', document.getElementById('cantidad').value);
 
       axios.post("/productos", formData)
@@ -106,6 +117,11 @@
                   $('#productosEmpty').hide();
 
                   var urlImagen = location.origin + '/insertado/producto/' + data['imagen']; 
+                  var descripcion = data['descripcion'];
+
+                  if(descripcion == null){
+                    descripcion = "";
+                  }
 
                   $('#contenedorProductos').prepend(
                       '<div class="col-md-3 col-12 my-3">'+
@@ -118,11 +134,16 @@
                                   '<img src="'+ urlImagen + '" height="100" width="100">'+
                                 '</div>'+
                                 '<h6><b>'+ data['tipo'] +'</b></h6>'+
-                                '<h6> Codigo #'+ data['codigo'] +'</h6>'+
+                                '<h6> Codigo <b>#'+ data['codigo'] +'</b></h6>'+
                                 '<h6><b>'+ data['precio'] +' '+ data['moneda'] +'</b></h6>'+
-                                '<p>'+ data['descripcion'] +'</p>'+
+                                '<p>'+ descripcion +'</p>'+
                                 '<div class="d-flex">'+
-                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(\'' + data['codigo'] + '\',\'' + data['nombre'] + '\',\'' + data['precio'] + '\',\'' + data['tipo'] + '\',\'' + data['moneda'] + '\',\'' + data['descripcion'] + '\',\'' + data['id'] + '\',\'' + data['imagen'] + '\', \'' + data['id_almacen'] + '\', \'' + data['id_marca'] + '\', \'' + data['cantidad'] + '\');">'+
+                                  '<a class="btn btn-secondary text-decoration-none mx-auto my-1" href="/productos/'+data['id']+'">'+
+                                    '<i class="fa fa-eye fa-1x me-2"></i> Información'+
+                                  '</a>'+
+                                '</div>'+
+                                '<div class="d-flex">'+
+                                  '<button class="btn btn-primary mx-auto my-1" data-bs-toggle="modal" data-bs-target="#editProducto" onclick="llenarForm(\'' + data['codigo'] + '\',\'' + data['nombre'] + '\',\'' + data['precio'] + '\',\'' + data['tipo'] + '\',\'' + data['moneda'] + '\',\'' + data['descripcion'] + '\',\'' + data['id'] + '\',\'' + data['imagen'] + '\', \'' + data['id_almacen'] + '\', \'' + data['id_marca'] + '\', \'' + data['cantidad'] + '\', \''+ data['id_zona'] +'\');">'+
                                   '<i class="fa fa-edit fa-1x me-2"></i> Editar</button>'+
                                 '</div>'+
                                 '<div class="d-flex">'+
@@ -142,7 +163,12 @@
                   document.getElementById('moneda').value = '';
                   document.getElementById('cantidad').value = '';
                   document.getElementById('descripcion').value = '';
+                  document.getElementById('id_almacen').value = '';
+                  document.getElementById('id_marca').value = '';
+                  document.getElementById('id_zona').value = '';
                   $('#cerrarModalProducto').click();
+
+                  location.reload();
               }
           })
           .catch(function(err) {
@@ -179,5 +205,13 @@
       buttonCreateEdit.innerText = "Agregar";
       buttonDelete.style.display = "none";
     }
+
+    // A $( document ).ready() block.
+    $( document ).ready(function() {
+        $("#id_almacen").on("change", function(e){
+          $('.zonas-option').hide();
+          $('.almacen-'+$(this).val()).show();
+        });
+    });
 
 </script>

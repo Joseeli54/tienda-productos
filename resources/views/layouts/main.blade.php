@@ -30,7 +30,7 @@
     <!-- Navbar brand -->
     <a class="navbar-brand me-2" href="/">
       <img
-        src=" {{asset('img/logo.png')}} "
+        src=" {{asset('img/logo_icon.png')}} "
         height="30"
         alt="Logo Tienda"
         loading="lazy"
@@ -74,10 +74,10 @@
           <a class="nav-link" href="{{ route('almacen') }}">Almacenes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Nosotros</a>
+          <a class="nav-link" href="{{ route('zona') }}">Zonas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contacto</a>
+          <a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a>
         </li>
       </ul>
       @endif
