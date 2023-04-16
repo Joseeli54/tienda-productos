@@ -9,31 +9,31 @@
         <div class="modal-body">
             <div class="mb-3">
               <label for="codigo" class="col-form-label">Codigo</label>
-              <input type="number" class="form-control" id="putCodigo" name="codigo">
+              <input type="number" class="form-control form-control-lg" id="putCodigo" name="codigo">
             </div>
             <div class="mb-3">
               <label for="nombre" class="col-form-label">Nombre</label>
-              <input class="form-control" id="putNombre" name="nombre">
+              <input class="form-control form-control-lg" id="putNombre" name="nombre">
             </div>
             <div class="mb-3">
               <label for="precio" class="col-form-label">Precio</label>
-              <input type="number" class="form-control" id="putPrecio" name="precio">
+              <input type="number" class="form-control form-control-lg" id="putPrecio" name="precio">
             </div>
             <div class="mb-3">
               <label for="tipo" class="col-form-label">Tipo</label>
-              <input class="form-control" id="putTipo" name="tipo">
+              <input class="form-control form-control-lg" id="putTipo" name="tipo">
             </div>
             <div class="mb-3">
               <label for="moneda" class="col-form-label">Moneda</label>
-              <input class="form-control" id="putMoneda" name="moneda">
+              <input class="form-control form-control-lg" id="putMoneda" name="moneda">
             </div>
             <div class="mb-3">
               <label for="cantidad" class="col-form-label">Cantidad</label>
-              <input type="number" class="form-control" id="putCantidad" name="cantidad">
+              <input type="number" class="form-control form-control-lg" id="putCantidad" name="cantidad">
             </div>
             <div class="mb-3">
               <label for="putIdAlmacen" class="col-form-label">Asignar un Almacén</label>
-              <select id="putIdAlmacen" name="putIdAlmacen" class="form-select">
+              <select id="putIdAlmacen" name="putIdAlmacen" class="form-select form-select-lg">
                   <option selected>Seleccione un almacén para el producto</option>
                 @foreach($almacenes as $almacen)
                   <option value="{{ $almacen->id }}"> Almacén numero {{ $almacen->numero }}</option>
@@ -42,7 +42,7 @@
             </div>
             <div class="mb-3">
               <label for="putIdMarca" class="col-form-label">Marca del Producto</label>
-              <select id="putIdMarca" name="putIdMarca" class="form-select">
+              <select id="putIdMarca" name="putIdMarca" class="form-select form-select-lg">
                   <option selected>Seleccione la marca del producto</option>
                 @foreach($marcas as $marca)
                   <option value="{{ $marca->id }}"> {{ $marca->nombre }}</option>
@@ -50,8 +50,17 @@
               </select>
             </div>
             <div class="mb-3">
+              <label for="putIdZona" class="col-form-label">Zona del Producto</label>
+              <select id="putIdZona" name="putIdZona" class="form-select form-select-lg">
+                  <option value="none" selected>Seleccione la zona donde estará el producto</option>
+                @foreach($zonas as $zona)
+                  <option value="{{ $zona->id }}" class="almacenEdit-{{ $zona->id_almacen }} zonas-option-edit"> Zona #{{ $zona->numero }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
               <label for="descripcion" class="col-form-label">Descripción del Producto</label>
-              <textarea class="form-control" id="putDescripcion" name="descripcion"></textarea>
+              <textarea class="form-control form-control-lg" id="putDescripcion" name="descripcion"></textarea>
             </div>
             <div class="form-group">
               <label for="imagen" class="col-form-label">Agregar imagen del producto</label>
@@ -82,7 +91,7 @@
     <script type="text/javascript">
     var element = document.getElementById("updateProducto");
 
-    function llenarForm(codigo, nombre, precio, tipo, moneda, descripcion, id, imagen, id_almacen, id_marca, cantidad){
+    function llenarForm(codigo, nombre, precio, tipo, moneda, descripcion, id, imagen, id_almacen, id_marca, cantidad, id_zona){
        document.getElementById('putCodigo').value = codigo;
        document.getElementById('putNombre').value = nombre;
        document.getElementById('putPrecio').value = precio;
@@ -92,7 +101,11 @@
        document.getElementById('putId').value = id;
        document.getElementById('putImagenText').value = imagen;
        document.getElementById('putIdAlmacen').value = id_almacen;
+       $('.zonas-option-edit').hide();
+       $('.almacenEdit-'+id_almacen).show();
+
        document.getElementById('putIdMarca').value = id_marca;
+       document.getElementById('putIdZona').value = id_zona;
        document.getElementById('putCantidad').value = cantidad;
        
        document.getElementById('editImgOutput').src = location.origin + '/insertado/producto/' + imagen;
@@ -154,6 +167,7 @@
       formData.append('descripcion', document.getElementById('putDescripcion').value);
       formData.append('id_almacen', document.getElementById('putIdAlmacen').value);
       formData.append('id_marca', document.getElementById('putIdMarca').value);
+      formData.append('id_zona', document.getElementById('putIdZona').value);
       formData.append('cantidad', document.getElementById('putCantidad').value);
       formData.append('_method', 'PUT');
 
@@ -174,6 +188,7 @@
                   document.getElementById('putImagenText').value = '';
                   document.getElementById('putIdAlmacen').value = '';
                   document.getElementById('putIdMarca').value = '';
+                  document.getElementById('putIdZona').value = '';
                   document.getElementById('putCantidad').value = '';
                   $('#cerrarModalProductoEdit').click();
 
@@ -185,5 +200,13 @@
           });
 
       }, false);
+
+      $( document ).ready(function() {
+          $("#putIdAlmacen").on("change", function(e){
+            $('.zonas-option-edit').hide();
+            $('.almacenEdit-'+$(this).val()).show();
+            $('#putIdZona').val("none");
+          });
+      });
 
 </script>

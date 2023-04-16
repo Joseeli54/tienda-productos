@@ -149,6 +149,7 @@ class AlmacenController extends Controller
      */
     public function destroy(Almacen $almacen)
     {
+        DB::table('movimiento')->where('id_almacen', $almacen->id)->delete();
         $almacen->delete();
 
         return redirect('/almacen');

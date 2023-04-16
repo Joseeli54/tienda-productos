@@ -47,5 +47,15 @@ Route::get('marcas', 'MarcaController@index')->name('marcas');
 Route::resource('unidadmedida', 'UnidadMedidaController');
 Route::get('unidadmedida', 'UnidadMedidaController@index')->name('unidadmedida');
 
+//Zona
+Route::resource('zona', 'ZonaController');
+Route::get('zona', 'ZonaController@index')->name('zona');
+
+//Persona
+Route::post('/crearpersona','PersonController@crearPersona');
+
+//Nosotros
+Route::view('nosotros', 'nosotros')->name('nosotros');
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

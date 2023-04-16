@@ -14,4 +14,6 @@ class Zona extends Model
     //como la clave primaria es alfanumerica se debe coloar para que llene bien la N a N
     public $incrementing = true;
 
+    //Disable at_update and at_create
+    public $timestamps = false;
 }

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Almacen;
 use App\Models\Movimiento;
 use App\Models\Marca;
+use App\Models\Zona;
 use Illuminate\Support\Facades\DB;
 //Las 2 lineas se utilizan para el envió de mails
 use Illuminate\Support\Facades\Mail;
@@ -37,9 +38,11 @@ class ProductController extends Controller
                     ORDER BY p.id DESC"));
         $almacenes = Almacen::all();
         $marcas = Marca::all();
+        $zonas = Zona::all();
         return view('products.product-index', ["products" => $products, 
                                                "almacenes" => $almacenes,
-                                               "marcas" => $marcas]);
+                                               "marcas" => $marcas,
+                                               "zonas" => $zonas]);
     }
 
     /**
@@ -80,6 +83,7 @@ class ProductController extends Controller
         $product->tipo = $request->tipo;
         $product->descripcion = $request->descripcion;
         $product->id_marca = $request->id_marca;
+        $product->id_zona = $request->id_zona;
         $product->imagen = $name;
         $product->cantidad = $request->cantidad;
 
@@ -122,11 +126,13 @@ class ProductController extends Controller
                            m.id_almacen,
                            p.id_marca,
                            a.numero,
+                           z.numero AS zona,
                            ma.nombre AS marca
                     FROM producto p 
                     LEFT JOIN movimiento m ON p.id = m.id_producto
                     LEFT JOIN almacen a ON a.id = m.id_almacen
                     LEFT JOIN marca ma ON ma.id = p.id_marca
+                    LEFT JOIN zona z ON z.id = p.id_zona
                     WHERE p.id = $id
                     ORDER BY p.id DESC"));
 
@@ -138,11 +144,13 @@ class ProductController extends Controller
 
         $almacenes = Almacen::all();
         $marcas = Marca::all();
+        $zonas = Zona::all();
 
         return view('products.product-show', ["product" => $product[0], 
                                                "unidadmedida" => $unidadmedida, 
                                                "almacenes" => $almacenes,
-                                               "marcas" => $marcas]);
+                                               "marcas" => $marcas,
+                                               "zonas" => $zonas]);
     }
 
     /**
@@ -211,6 +219,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         DB::table('movimiento')->where('id_producto', $id)->delete();
+        DB::table('unidadmedida')->where('id_producto', $id)->delete();
         Product::destroy($id);
 
         return redirect('/productos');
