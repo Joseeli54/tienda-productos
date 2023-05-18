@@ -5,6 +5,19 @@
 @section('contenido')
 <div class="d-flex">
     <div class="container-fluid my-4 mx-md-5">
+
+        @if($rol == 1)
+            <h2>Usted es un administrador</h2>
+        @endif
+
+        @if($rol == 2)
+            <h2>Usted es un despachador</h2>
+        @endif
+
+        @if($rol == 3)
+            <h2>Usted es un operario</h2>
+        @endif
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card font-size-title">
@@ -65,9 +78,12 @@
                                 {{ session('status') }}
                             </div>
                         @endif --}}
-                        <div class="my-2 text-primary">
-                            <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addPersona"> <i class="fa fa-plus fa-1x"></i> Crear Usuario</a>
-                        </div>
+
+                        @if($rol == 1)
+                            <div class="my-2 text-primary">
+                                <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addPersona"> <i class="fa fa-plus fa-1x"></i> Crear Usuario</a>
+                            </div>
+                        @endif
 
                         @if(!empty($persons))
                             <p id="personaEmpty" style="display: none">No hay usuarios disponibles...</p>
@@ -84,15 +100,18 @@
                                         <h6><b>Nombre Usuario:</b> {{ $person->username }}</h6>
                                         <p>Fecha de creación: {{ $person->created_at }}</p>
                                     </div>
-                                    <div class="col-md-12 col-12 d-flex">
-                                        <a class="text-danger text-decoration-none my-1 mx-auto delete-button-persona" data-value="{{ $person->id }}" data-bs-toggle="modal" data-bs-target="#deletePersona" style="cursor: pointer;">
-                                            <i class="fa fa-trash fa-1x me-2"></i> Eliminar
-                                        </a>
 
-                                        <a class="mx-auto my-1 text-decoration-none" style="cursor: pointer;">
-                                            <i class="fa fa-edit fa-1x me-2"></i> Editar
-                                        </a>
-                                    </div>
+                                    @if($rol == 1)
+                                        <div class="col-md-12 col-12 d-flex">
+                                            <a class="text-danger text-decoration-none my-1 mx-auto delete-button-persona" data-value="{{ $person->id }}" data-bs-toggle="modal" data-bs-target="#deletePersona" style="cursor: pointer;" onclick="setURLDeleteFormPersona(this)">
+                                                <i class="fa fa-trash fa-1x me-2"></i> Eliminar
+                                            </a>
+
+                                            <a class="mx-auto my-1 text-decoration-none" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#putPersona" onclick="llenarFormPersona('{{ $person->id }}', '{{ $person->nombre }}', '{{ $person->apellido }}', '{{ $person->doc_persona }}', '{{ $person->username }}', '{{ $person->correo }}', '{{ $person->fec_nac }}', '{{ $person->telefono }}', '{{ $person->id_rol }}');">
+                                                <i class="fa fa-edit fa-1x me-2"></i> Editar
+                                            </a>
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Almacen;
 use App\Models\Person;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class AlmacenController extends Controller
 {
@@ -29,7 +30,8 @@ class AlmacenController extends Controller
         $almacenes = DB::select(DB::raw("  SELECT *
                                         FROM almacen
                                         ORDER BY id DESC"));
-        return view('almacenes.almacen-index', ["almacenes" => $almacenes]);
+        $rol = Person::getRolePerson(Session::get('username'));
+        return view('almacenes.almacen-index', ["almacenes" => $almacenes, "rol" => $rol]);
     }
 
     /**

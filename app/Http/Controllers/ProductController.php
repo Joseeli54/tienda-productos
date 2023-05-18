@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\DB;
 //Las 2 lineas se utilizan para el envió de mails
 use Illuminate\Support\Facades\Mail;
 use App\Mail\nuevoProducto;
+use App\Models\Person;
+use Session;
+
 class ProductController extends Controller
 {
     /**
@@ -39,10 +42,12 @@ class ProductController extends Controller
         $almacenes = Almacen::all();
         $marcas = Marca::all();
         $zonas = Zona::all();
+        $rol = Person::getRolePerson(Session::get('username'));
         return view('products.product-index', ["products" => $products, 
                                                "almacenes" => $almacenes,
                                                "marcas" => $marcas,
-                                               "zonas" => $zonas]);
+                                               "zonas" => $zonas, 
+                                               "rol" => $rol]);
     }
 
     /**
@@ -145,12 +150,14 @@ class ProductController extends Controller
         $almacenes = Almacen::all();
         $marcas = Marca::all();
         $zonas = Zona::all();
+        $rol = Person::getRolePerson(Session::get('username'));
 
         return view('products.product-show', ["product" => $product[0], 
                                                "unidadmedida" => $unidadmedida, 
                                                "almacenes" => $almacenes,
                                                "marcas" => $marcas,
-                                               "zonas" => $zonas]);
+                                               "zonas" => $zonas,
+                                               "rol" => $rol]);
     }
 
     /**

@@ -25,7 +25,8 @@ class Person extends Authenticatable
          'password',
          'doc_persona',
          'fec_nac',
-         'telefono'
+         'telefono',
+         'id_rol'
     ];
 
     protected $hidden = [
@@ -43,6 +44,10 @@ class Person extends Authenticatable
     }
 
     public function getPersonByUsername($id){
-        return Alumno::where('username' , '=' , $id)->get();
+        return Person::where('username' , '=' , $id)->get();
+    }
+
+    public static function getRolePerson($username){
+        return Person::select('id_rol')->where('username', '=', $username)->get()[0]->id_rol;
     }
 }

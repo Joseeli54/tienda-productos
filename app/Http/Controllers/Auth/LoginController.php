@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Session;
 
 class LoginController extends Controller
 {
@@ -50,6 +51,7 @@ class LoginController extends Controller
 
         // Crea la sesión si los datos son correctos
         if (Auth::attempt($datos )) {
+            Session::put('username', $request->username);
             return redirect('/');
         }
 

@@ -5,11 +5,15 @@
 @section('contenido')
 
 	<div class="container-fluid my-4 px-md-4">
-    		<div class="my-2 mx-md-4 text-primary">
-                <a style="cursor: pointer; font-size: 18px!important;" data-bs-toggle="modal" data-bs-target="#addProducto"> 
-            		<i  class="fa fa-plus fa-1x"></i> Crear Producto
-                </a>
-            </div>
+
+			@if($rol == 1 || $rol == 2)
+				<div class="my-2 mx-md-4 text-primary">
+					<a style="cursor: pointer; font-size: 18px!important;" data-bs-toggle="modal" data-bs-target="#addProducto"> 
+						<i  class="fa fa-plus fa-1x"></i> Crear Producto
+					</a>
+				</div>
+            @endif
+
 
             @if(count($products) > 0)
                 <p id="productosEmpty" style="display: none;">No hay productos disponibles...</p>
@@ -48,11 +52,13 @@
 									onclick="llenarForm('{{ $product->codigo }}','{{ $product->nombre }}','{{ $product->precio }}','{{ $product->tipo }}','{{ $product->moneda }}','{{ $product->descripcion }}','{{ $product->id }}','{{ $product->imagen }}','{{ $product->id_almacen }}', '{{ $product->id_marca }}', '{{ $product->cantidad }}', '{{ $product->id_zona }}');"><i class="fa fa-edit fa-1x me-2"></i> Editar</button>
 								</div>
 
-								<div class="d-flex">
-								    <a class="btn btn-danger text-decoration-none mx-auto my-1" data-value="{{ $product->id }}" data-bs-toggle="modal" data-bs-target="#deleteProducto" style="cursor: pointer;" onclick="setURLDeleteFormProducto(this)">
-                                        <i class="fa fa-trash fa-1x me-2"></i> Eliminar
-                                    </a>
-								</div>
+								@if($rol == 1)
+									<div class="d-flex">
+										<a class="btn btn-danger text-decoration-none mx-auto my-1" data-value="{{ $product->id }}" data-bs-toggle="modal" data-bs-target="#deleteProducto" style="cursor: pointer;" onclick="setURLDeleteFormProducto(this)">
+											<i class="fa fa-trash fa-1x me-2"></i> Eliminar
+										</a>
+									</div>
+								@endif
 							</div>
 						</div>
 					</div>

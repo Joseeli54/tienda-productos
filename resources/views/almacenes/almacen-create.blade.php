@@ -65,6 +65,8 @@ aria-hidden="true">
                     document.getElementById('tipo').value = '';
                     document.getElementById('descripcion').value = '';
                     $('#cerrarModalAlmacen').click();
+
+                    location.reload();
                 }
             })
             .catch(function(err) {

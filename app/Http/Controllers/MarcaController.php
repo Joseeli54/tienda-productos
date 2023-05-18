@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Marca;
 use Illuminate\Support\Facades\DB;
+use App\Models\Person;
+use Session;
 
 class MarcaController extends Controller
 {
@@ -29,7 +31,8 @@ class MarcaController extends Controller
         $marcas = DB::select(DB::raw("  SELECT *
                                         FROM marca
                                         ORDER BY id DESC"));
-        return view('marcas.marca-index', ["marcas" => $marcas]);
+        $rol = Person::getRolePerson(Session::get('username'));
+        return view('marcas.marca-index', ["marcas" => $marcas, "rol" => $rol]);
     }
 
     /**

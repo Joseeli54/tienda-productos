@@ -11,7 +11,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <form method="POST" class="my-auto" id="formularioEliminarAlmacen" action="/persona/">
+        <form method="POST" class="my-auto" id="formularioEliminarPersona" action="/deletepersona/">
             @method('DELETE')
             @csrf
             <button type="submit" class="btn btn-danger">
@@ -22,3 +22,10 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    function setURLDeleteFormPersona(button){
+        var formularioEliminarPersona = document.getElementById('formularioEliminarPersona');
+        formularioEliminarPersona.setAttribute('action', '/deletepersona/' + button.getAttribute('data-value'));
+    }
+</script>

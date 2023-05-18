@@ -19,7 +19,7 @@
                                     <label for="nombre" class="col-md col-form-label text-md-start">{{ __('Nombre') }}</label>
 
                                     <div class="col-md col-12">
-                                        <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                                        <input id="nombre" type="text" class="form-control form-control-lg @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
 
                                         @error('nombre')
                                             <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
                                     <label for="apellido" class="col-md col-form-label text-md-start">{{ __('Apellido') }}</label>
 
                                     <div class="col-md col-12">
-                                        <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
+                                        <input id="apellido" type="text" class="form-control form-control-lg @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido" autofocus>
 
                                         @error('apellido')
                                             <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                                 <div class="col-md-6 col-12">
                                     <label for="doc_persona" class="col-md col-form-label text-md-start">{{ __('Documento de Identidad') }}</label>
                                     <div class="col-md col-12">
-                                        <input id="doc_persona" type="text" class="form-control @error('doc_persona') is-invalid @enderror" name="doc_persona" value="{{ old('doc_persona') }}" required autocomplete="doc_persona" autofocus>
+                                        <input id="doc_persona" type="text" class="form-control form-control-lg @error('doc_persona') is-invalid @enderror" name="doc_persona" value="{{ old('doc_persona') }}" required autocomplete="doc_persona" autofocus>
 
                                         @error('doc_persona')
                                             <span class="invalid-feedback" role="alert">
@@ -60,7 +60,7 @@
                                 <div class="col-md-6 col-12">
                                     <label for="username" class="col-md col-form-label text-md-start">{{ __('Username') }}</label>
                                     <div class="col-md col-12">
-                                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                        <input id="username" type="text" class="form-control form-control-lg @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
 
                                         @error('username')
                                             <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
                                 <label for="correo" class="col-md col-form-label text-md-start">{{ __('Correo Electronico') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="correo" type="email" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo') }}" required autocomplete="correo">
+                                    <input id="correo" type="email" class="form-control form-control-lg @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo') }}" required autocomplete="correo">
 
                                     @error('correo')
                                         <span class="invalid-feedback" role="alert">
@@ -89,7 +89,7 @@
                                 <label for="fec_nac" class="col-md col-form-label text-md-start">{{ __('Fecha de Nacimiento') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="fec_nac" type="date" class="form-control @error('fec_nac') is-invalid @enderror" name="fec_nac" value="{{ old('fec_nac') }}" required autocomplete="fec_nac">
+                                    <input id="fec_nac" type="date" class="form-control form-control-lg @error('fec_nac') is-invalid @enderror" name="fec_nac" value="{{ old('fec_nac') }}" required autocomplete="fec_nac">
 
                                     @error('fec_nac')
                                         <span class="invalid-feedback" role="alert">
@@ -103,7 +103,7 @@
                                 <label for="telefono" class="col-md col-form-label text-md-start">{{ __('Telefono') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
+                                    <input id="telefono" type="text" class="form-control form-control-lg @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
 
                                     @error('telefono')
                                         <span class="invalid-feedback" role="alert">
@@ -114,10 +114,23 @@
                             </div>
 
                             <div class="row mb-3 mx-md-5">
+                                <label for="id_rol" class="col-form-label">Ocupación</label>
+                                
+                                <div class="col-md-12">
+                                    <select id="id_rol" name="id_rol" class="form-select form-select-lg" required>
+                                        <option value="" class="id_roles" selected> Seleccionar Ocupación</option>
+                                        <!-- <option value="1"> Administrador </option> -->
+                                        <option value="2"> Despachador </option>
+                                        <option value="3"> Operario </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 mx-md-5">
                                 <label for="password" class="col-md col-form-label text-md-start">{{ __('Password') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -131,7 +144,7 @@
                                 <label for="password-confirm" class="col-md col-form-label text-md-start">{{ __('Confirm Password') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
 

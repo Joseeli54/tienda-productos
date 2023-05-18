@@ -411,3 +411,12 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--Admin
+INSERT INTO `roles` (id, tipo, nombre, descripcion) values (1, 'Admin', 'Administrador', 'Este es el jefe del almacén y tendrá todos los privilegios. Desde crear cualquier registro dentro de los módulos, como de eliminar algún empleado dentro del sistema o modificar su información. Su actividad como tal, será supervisar los registro y acciones que realicen los otros empleados dentro del sistema. Sin embargo, es posible realizar sus mismas actividades en caso de que no haya algún personal disponible.'); 
+
+--User Despachador
+INSERT INTO `roles` (id, tipo, nombre, descripcion) values (2, 'User', 'Despachador', 'Es el empleado encargado de consultar los productos disponibles, almacenarlos en el sistema y llenar la información de los mismos, para luego asignarlos a un almacén en específico dentro del sistema. Su actividad como tal, será realizar el llenado de información de los elementos dentro del sistema y aprobar cualquier movimiento que se realice al producto.'); 
+
+--User Operario
+INSERT INTO `roles` (id, tipo, nombre, descripcion) values (3, 'User', 'Operario', 'Es el empleado encargado de mantener actualizada la información del producto, además de asignarle una zona en específico y mantener la gestión de ellos dentro del almacén. Estos no tendrán acceso a la creación de nuevos registros. Solamente tendrán acceso a editar la información, para mantener actualizada la base de datos del almacén.');

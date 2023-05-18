@@ -6,11 +6,13 @@
 
 <div class="container my-4 px-md-4">
 
-	<div class="my-3 mx-md-4 text-primary">
-        <a class="text-decoration-none" style="cursor: pointer; font-size: 18px!important;" href="/marcas/create"> 
-    		<i  class="fa fa-plus fa-1x"></i> Crear Marca
-        </a>
-    </div>
+    @if($rol == 1 || $rol == 2)
+        <div class="my-3 mx-md-4 text-primary">
+            <a class="text-decoration-none" style="cursor: pointer; font-size: 18px!important;" href="/marcas/create"> 
+                <i  class="fa fa-plus fa-1x"></i> Crear Marca
+            </a>
+        </div>
+    @endif
 
     <table id="TablaMarca" class="table table-bordered table-sm my-3">
         <thead class="thead-dark">
@@ -30,13 +32,15 @@
         			<td>{{ $marca->descripcion }}</td>
         			<td class="d-flex text-center">
         				<a class="btn btn-primary ms-auto" href="/marcas/{{ $marca->id }}/edit"> Editar </a>
-                        <form method="POST" class="me-auto ps-1" action="/marcas/{{ $marca->id }}">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger">
-                                Eliminar
-                            </button>
-                        </form>
+                        @if($rol == 1)
+                            <form method="POST" class="me-auto ps-1" action="/marcas/{{ $marca->id }}">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    Eliminar
+                                </button>
+                            </form>
+                        @endif
         			</td>
         		</tr>
         	@endforeach

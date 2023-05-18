@@ -65,6 +65,19 @@
                 </div>
 
                 <div class="row mb-3 mx-md-5">
+                    <label for="id_rol" class="col-form-label">Ocupación</label>
+                    
+                    <div class="col-md-12">
+                        <select id="id_rol" name="id_rol" class="form-select form-select-lg" required>
+                            <option value="" class="id_roles" selected> Seleccionar Ocupación</option>
+                            <option value="1"> Administrador </option>
+                            <option value="2"> Despachador </option>
+                            <option value="3"> Operario </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3 mx-md-5">
                     <label for="password" class="col-md col-form-label text-md-start">{{ __('Password') }}</label>
 
                     <div class="col-md-12">
@@ -108,6 +121,7 @@
         formData.append('telefono', document.getElementById('telefono').value);
         formData.append('password', document.getElementById('password').value);
         formData.append('fec_nac', document.getElementById('fec_nac').value);
+        formData.append('id_rol', document.getElementById('id_rol').value);
 
         axios.post("/crearpersona", formData)
             .then(function(res) {
@@ -140,7 +154,10 @@
                     document.getElementById('telefono').value = "";
                     document.getElementById('password').value = "";
                     document.getElementById('fec_nac').value = "";
+                    document.getElementById('id_rol').value = "";
                     $('#cerrarModalPersona').click();
+
+                    location.reload();
                 }
             })
             .catch(function(err) {

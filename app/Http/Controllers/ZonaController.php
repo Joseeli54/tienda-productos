@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Almacen;
 use App\Models\Zona;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Person;
+use Session;
 
 class ZonaController extends Controller
 {
@@ -32,7 +33,9 @@ class ZonaController extends Controller
                                         FROM zona z
                                         LEFT JOIN almacen a ON a.id = z.id_almacen
                                         ORDER BY id DESC"));
-        return view('zona.zona-index', ["zonas" => $zonas]);
+        $rol = Person::getRolePerson(Session::get('username'));
+
+        return view('zona.zona-index', ["zonas" => $zonas, "rol" => $rol]);
     }
 
     /**

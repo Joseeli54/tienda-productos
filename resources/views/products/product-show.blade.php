@@ -36,14 +36,18 @@
 	    @endforeach
 
 	</div>
-
+	
 	<div class="d-flex">
-		<a class="btn btn-primary btn-lg botoncito ms-auto me-2" data-bs-toggle="modal" data-bs-target="#editProducto"
+		@if($rol == 2)
+			<a class="btn btn-primary btn-lg botoncito ms-auto me-2" data-bs-toggle="modal" data-bs-target="#editProducto"
 			onclick="llenarForm('{{ $product->codigo }}','{{ $product->nombre }}','{{ $product->precio }}','{{ $product->tipo }}','{{ $product->moneda }}','{{ $product->descripcion }}','{{ $product->id }}','{{ $product->imagen }}','{{ $product->id_almacen }}', '{{ $product->id_marca }}', '{{ $product->cantidad }}');"><i class="fa fa-edit fa-1x me-2"></i> Actualizar</a>
-        
-	    <a class="btn btn-danger btn-lg text-decoration-none me-auto" data-value="{{ $product->id }}" data-bs-toggle="modal" data-bs-target="#deleteProducto" style="cursor: pointer;" onclick="setURLDeleteFormProducto(this)">
-            <i class="fa fa-trash fa-1x me-2"></i> Eliminar
-        </a>
+        @endif
+
+		@if($rol == 1)
+			<a class="btn btn-danger btn-lg text-decoration-none me-auto" data-value="{{ $product->id }}" data-bs-toggle="modal" data-bs-target="#deleteProducto" style="cursor: pointer;" onclick="setURLDeleteFormProducto(this)">
+				<i class="fa fa-trash fa-1x me-2"></i> Eliminar
+			</a>
+		@endif
     </div>
 </div>
 

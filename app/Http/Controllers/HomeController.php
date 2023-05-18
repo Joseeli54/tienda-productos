@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Almacen;
 use App\Models\Person;
+use Session;
 
 use Illuminate\Http\Request;
 
@@ -27,8 +28,10 @@ class HomeController extends Controller
     {
         $almacenes = Almacen::all()->sortByDesc("id")->take(3);
         $persons = Person::all()->sortByDesc("id")->take(3);
+        $rol = Person::getRolePerson(Session::get('username'));
 
         return view('home', ["almacenes" => $almacenes, 
-                            "persons" => $persons]);
+                            "persons" => $persons,
+                            "rol" => $rol]);
     }
 }

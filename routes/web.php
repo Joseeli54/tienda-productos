@@ -53,6 +53,8 @@ Route::get('zona', 'ZonaController@index')->name('zona');
 
 //Persona
 Route::post('/crearpersona','PersonController@crearPersona');
+Route::put('/editarpersona/{id}','PersonController@editarPersona');
+Route::delete('/deletepersona/{id}', 'PersonController@deletePersona')->name('deletepersona');
 
 //Nosotros
 Route::view('nosotros', 'nosotros')->name('nosotros');

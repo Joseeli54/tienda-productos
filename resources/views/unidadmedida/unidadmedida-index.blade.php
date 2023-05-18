@@ -6,11 +6,13 @@
 
 <div class="container my-4 px-md-4">
 
-	<div class="my-3 mx-md-4 text-primary">
-        <a class="text-decoration-none" style="cursor: pointer; font-size: 18px!important;" href="/unidadmedida/create"> 
-    		<i  class="fa fa-plus fa-1x"></i> Crear Unidad de Medida
-        </a>
-    </div>
+    @if($rol == 2 || $rol == 1)
+        <div class="my-3 mx-md-4 text-primary">
+            <a class="text-decoration-none" style="cursor: pointer; font-size: 18px!important;" href="/unidadmedida/create"> 
+                <i  class="fa fa-plus fa-1x"></i> Crear Unidad de Medida
+            </a>
+        </div>
+    @endif
 
     <table id="TablaUnidad" class="table table-bordered table-sm my-3">
         <thead class="thead-dark">
@@ -34,13 +36,16 @@
                     <td>{{ $unidad->valor }}</td>
         			<td class="d-flex text-center">
         				<a class="btn btn-primary ms-auto" href="/unidadmedida/{{ $unidad->id }}/edit"> Editar </a>
-                        <form method="POST" class="me-auto ps-1" action="/unidadmedida/{{ $unidad->id }}">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger">
-                                Eliminar
-                            </button>
-                        </form>
+
+                        @if($rol == 1)
+                            <form method="POST" class="me-auto ps-1" action="/unidadmedida/{{ $unidad->id }}">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    Eliminar
+                                </button>
+                            </form>
+                        @endif
         			</td>
         		</tr>
         	@endforeach

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UnidadMedida;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Person;
+use Session;
 
 class UnidadMedidaController extends Controller
 {
@@ -30,8 +31,9 @@ class UnidadMedidaController extends Controller
         $unidadmedida = DB::select(DB::raw("SELECT *
                                             FROM unidadmedida
                                             ORDER BY id DESC"));
+        $rol = Person::getRolePerson(Session::get('username'));
 
-        return view('unidadmedida.unidadmedida-index', ["unidadmedida" => $unidadmedida]);
+        return view('unidadmedida.unidadmedida-index', ["unidadmedida" => $unidadmedida, "rol" => $rol]);
     }
 
     /**
