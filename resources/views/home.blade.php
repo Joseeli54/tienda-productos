@@ -29,9 +29,12 @@
                                 {{ session('status') }}
                             </div>
                         @endif --}}
-                        <div class="my-2 text-primary">
-                            <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addAlmacen"> <i class="fa fa-plus fa-1x"></i> Crear Almacen</a>
-                        </div>
+
+                        @if($rol == 1 || $rol == 2)
+                            <div class="my-2 text-primary">
+                                <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#addAlmacen"> <i class="fa fa-plus fa-1x"></i> Crear Almacen</a>
+                            </div>
+                        @endif
 
                         @if(!empty($almacenes))
                             <p id="almacenesEmpty" style="display: none;">No hay almacenes disponibles...</p>
@@ -49,10 +52,12 @@
                                         <p>{{ $almacen->descripcion }}</p>
                                     </div>
                                     <div class="col-md col-12 d-flex">
-                                        <a class="text-danger text-decoration-none mx-2 my-auto delete-button-almacen" data-value="{{ $almacen->id }}" data-bs-toggle="modal" data-bs-target="#deleteAlmacen" style="cursor: pointer;" onclick="setURLDeleteFormAlmacen(this)">
-                                            <i class="fa fa-trash fa-1x me-2"></i> Eliminar
-                                        </a>
 
+                                        @if($rol == 1)
+                                            <a class="text-danger text-decoration-none mx-2 my-auto delete-button-almacen" data-value="{{ $almacen->id }}" data-bs-toggle="modal" data-bs-target="#deleteAlmacen" style="cursor: pointer;" onclick="setURLDeleteFormAlmacen(this)">
+                                                <i class="fa fa-trash fa-1x me-2"></i> Eliminar
+                                            </a>
+                                        @endif
                                         <a class="mx-2 my-auto text-decoration-none" data-bs-toggle="modal" data-bs-target="#editAlmacen" style="cursor: pointer;" onclick="llenarFormAlmacen('{{ $almacen->id }}','{{ $almacen->numero }}','{{ $almacen->tipo }}', '{{ $almacen->descripcion }}');">
                                             <i class="fa fa-edit fa-1x me-2"></i>Editar
                                         </a>
