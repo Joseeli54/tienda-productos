@@ -123,9 +123,16 @@
 
                     </div>
                 </div>
-                <div class="d-flex my-2">
-                    <a class="btn mx-auto ng-white" style="border: 1px solid;">Ver mas...</a>
-                </div>
+
+                @if($totals_persons == 0)
+                    <div class="d-flex my-2">
+                        <a class="btn mx-auto ng-white" style="border: 1px solid;" href="/?totals_persons=1">Ver mas...</a>
+                    </div>
+                @else
+                    <div class="d-flex my-2">
+                        <a class="btn mx-auto ng-white" style="border: 1px solid;" href="/">Ver menos...</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

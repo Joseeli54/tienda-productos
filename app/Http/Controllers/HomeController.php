@@ -27,11 +27,26 @@ class HomeController extends Controller
     public function index()
     {
         $almacenes = Almacen::all()->sortByDesc("id")->take(3);
-        $persons = Person::all()->sortByDesc("id")->take(3);
+        $totals_persons = 0;
+
+        if($_GET){
+            if(!empty($_GET['totals_persons'])){
+                $persons = Person::all()->sortByDesc("id");
+                $totals_persons = 1;
+            }else{
+                $persons = Person::all()->sortByDesc("id")->take(3);
+                $totals_persons = 0;
+            }
+        }else{
+            $persons = Person::all()->sortByDesc("id")->take(3);
+            $totals_persons = 0;
+        }
+        
         $rol = Person::getRolePerson(Session::get('username'));
 
         return view('home', ["almacenes" => $almacenes, 
                             "persons" => $persons,
-                            "rol" => $rol]);
+                            "rol" => $rol, 
+                            "totals_persons" => $totals_persons]);
     }
 }

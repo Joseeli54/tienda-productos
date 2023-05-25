@@ -98,9 +98,6 @@
               Sign up for free
             </a>
         @endif
-
-        <a class="btn btn-dark px-3" href="https://github.com/Joseeli54/tienda-productos" target="_blank" role="button"><i class="fa fa-github"></i
-        ></a>
       </div>
     </div>
     <!-- Collapsible wrapper -->
